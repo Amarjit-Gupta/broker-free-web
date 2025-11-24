@@ -26,6 +26,7 @@ const SingleCustomerData = () => {
     const [address, setAddress] = useState("");
     const [fileurl, setFileurl] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [dataId,setDataId] = useState("");
 
     const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const SingleCustomerData = () => {
                 setAddress(d1?.address);
                 setFileurl(d1?.url);
                 setUserEmail(d1?.userEmail);
+                setDataId(d1?._id)
             }
             else {
                 alert(result.message);
@@ -105,7 +107,7 @@ const SingleCustomerData = () => {
 
                 let result = await fetch(`${url}/data/sendMail`, {
                     method: "post",
-                    body: JSON.stringify({name,phone,address,userEmail}),
+                    body: JSON.stringify({name,phone,address,userEmail,dataId}),
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
