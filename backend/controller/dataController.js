@@ -187,11 +187,14 @@ export const getSingleCustomerData = async (req, res) => {
 // for send Email to admin
 export const sendEmail = async (req, res) => {
     try {
-        const { userEmail, name, phone, address } = req.body;
-        if (!userEmail || !name || !phone || !address) {
-            return res.status(400).json({ success: false, message: "Please provide userEmail, name, phone, address..." });
+        const { userEmail, name, phone, address, dataId } = req.body;
+        if (!userEmail || !name || !phone || !address || !dataId) {
+            return res.status(400).json({ success: false, message: "Please provide userEmail, name, phone, address and dataId..." });
         }
-
+        let result = await Data.findOne({ _id: dataId });
+        result.availability = "Unavailable";
+        await result.save();
+        // console.log(result);
         let mailOptions = {
             from: process.env.SMTP_EMAIL,
             to: userEmail,
@@ -210,7 +213,7 @@ export const sendEmail = async (req, res) => {
     </div>`
         }
         let data = await transporter.sendMail(mailOptions);
-        return res.status(200).json({ success: true, message: "message send successfully..." });
+        return res.status(200).json({ success: true, message: "message send successfully...", result });
     }
     catch (err) {
         console.log(err.message);
