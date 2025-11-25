@@ -1,9 +1,30 @@
 @import "tailwindcss";
 
-body{background-color:  #f3f1f1;}
+body {
+  background-color: #f3f1f1;
+}
 
-input:-webkit-autofill,textarea:-webkit-autofill {
+input:-webkit-autofill,
+textarea:-webkit-autofill {
   transition-duration: 5000s;
 }
 
-.x1{top:100%;}
+.x1 {
+  top: 100%;
+}
+
+.load-icon{opacity: 0.5;}
+
+.rotate-icon {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

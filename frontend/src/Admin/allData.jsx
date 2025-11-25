@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import R from '../assets/R.jpeg';
+import loader from '../assets/loader.gif';
 
 import { ToastContainer, toast } from 'react-toastify';
 import { BiSolidEdit } from "react-icons/bi";
@@ -17,6 +17,8 @@ const AllData = () => {
     const [search, serSearch] = useState("");
     console.log(sort);
 
+    const [load1, setLoad1] = useState(false);
+
     const navigate = useNavigate();
 
     const getAllData = async () => {
@@ -29,6 +31,7 @@ const AllData = () => {
         }
         console.log("url: ", URL);
         try {
+            setLoad1(true);
             let data = await fetch(URL, {
                 method: "get",
                 headers: {
@@ -41,14 +44,17 @@ const AllData = () => {
 
             if (result.success) {
                 setValue(result.result);
+                setLoad1(false);
                 // alert(result.message);
             }
             else {
-                alert(result.message);
+                toast.error(result.message);
+                setLoad1(false);
             }
         }
         catch (err) {
-            alert("something went wrong...");
+            setLoad1(false);
+            toast.error("something went wrong...");
         }
     }
 
@@ -57,20 +63,31 @@ const AllData = () => {
     }, [sort]);
 
     const handleDelete = async (index) => {
-        try {
-            let data = await fetch(`${url}/data/deleteData/${index}`, {
-                method: "delete",
-                headers: {
-                    "Content-Type": "application/json",
-                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+        var confirmation = confirm("Are you sure...");
+        if (confirmation) {
+            try {
+                let data = await fetch(`${url}/data/deleteData/${index}`, {
+                    method: "delete",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+                    }
+                });
+                let result = await data.json();
+                if (result.success) {
+                    toast.success(result.message);
+                    getAllData();
                 }
-            });
-            let result = await data.json();
-            console.log(result);
-
+                else {
+                    toast.error(result.message);
+                }
+            }
+            catch (err) {
+                toast.error("something went wrong...");
+            }
         }
-        catch (err) {
-            alert("something went wrong...");
+        else {
+            toast.error("data not delete...");
         }
     }
 
@@ -79,11 +96,11 @@ const AllData = () => {
             let key = e.target.value;
             console.log(key);
             if (key) {
-                let result = await fetch(`${url}/data/searchAdminData/${key}`,{
-                    method:"get",
-                    headers:{
-                        "Content-Type":"application/json",
-                        "authorization":`Bearer ${JSON.parse(localStorage.getItem("token"))}`
+                let result = await fetch(`${url}/data/searchAdminData/${key}`, {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
                     }
                 });
                 let data = await result.json();
@@ -93,7 +110,7 @@ const AllData = () => {
                     // alert(result.message);
                 }
                 else {
-                    alert(result.message);
+                    toast.error(result.message);
                 }
             }
             else {
@@ -101,7 +118,7 @@ const AllData = () => {
             }
         }
         catch (err) {
-            alert("something went wrong...");
+            toast.error("something went wrong...");
         }
     }
 
@@ -118,50 +135,52 @@ const AllData = () => {
                 </select>
             </div>
 
-            <div className="w-79 md:w-[665px] xl:w-252 border m-auto mt-[2%] flex flex-wrap gap-7">
+            {load1 ? <div className="w-17 h-71 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
+                <div className="w-79 md:w-[665px] xl:w-252 border m-auto mt-[2%] flex flex-wrap gap-7">
 
-                {
-                    value.length ?
-                        value?.map((item, i) => {
-                            return (
-                                <div className="border border-gray-300 w-79 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
-                                    <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" />{console.log(item.url)}</div>
-                                    <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div>
+                    {
+                        value.length ?
+                            value?.map((item, i) => {
+                                return (
+                                    <div className="border border-gray-300 w-79 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
+                                        <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" />{console.log(item.url)}</div>
+                                        <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div>
 
-                                    <div className=" text-xl font-medium h-8 px-1">
-                                        Area: <span className="font-normal">{item?.area} sq ft</span>
-                                    </div>
-                                    <div className=" text-xl font-medium h-8 px-1">
-                                        Rent: <span className="font-normal">₹{item?.rent}</span>
-                                    </div>
-                                    <div className=" text-xl font-medium h-8 px-1">
-                                        Pincode:  <span className="font-normal">{item?.pincode}</span>
-                                    </div>
-                                    <div className=" text-xl font-medium h-8 px-1 flex justify-between">
-                                        <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
+                                        <div className=" text-xl font-medium h-8 px-1">
+                                            Area: <span className="font-normal">{item?.area} sq ft</span>
+                                        </div>
+                                        <div className=" text-xl font-medium h-8 px-1">
+                                            Rent: <span className="font-normal">₹{item?.rent}</span>
+                                        </div>
+                                        <div className=" text-xl font-medium h-8 px-1">
+                                            Pincode:  <span className="font-normal">{item?.pincode}</span>
+                                        </div>
+                                        <div className=" text-xl font-medium h-8 px-1 flex justify-between">
+                                            <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
 
-                                        {/* <span className="font-normal bg-green-300">Booked</span> */}
+                                            {/* <span className="font-normal bg-green-300">Booked</span> */}
+                                        </div>
+                                        <div className=" text-xl font-medium h-8 px-1">
+                                            Contact No: <span className="font-normal">{item?.contact}</span>
+                                        </div>
+                                        <div className=" text-xl font-medium h-8 px-1">
+                                            Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
+                                        </div>
+                                        <div className="text-xl font-medium h-15 px-1">
+                                            Address: <span className="font-normal">{item?.address}</span>
+                                        </div>
+                                        <div className="border font-medium h-10 rounded-b-sm px-1 flex justify-around text-3xl">
+                                            <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(item._id)}><MdDeleteForever /></button>
+                                            <button className='text-green-500 cursor-pointer' onClick={() => navigate(`/edit/${item._id}`)}><BiSolidEdit /></button>
+                                        </div>
                                     </div>
-                                    <div className=" text-xl font-medium h-8 px-1">
-                                        Contact No: <span className="font-normal">{item?.contact}</span>
-                                    </div>
-                                    <div className=" text-xl font-medium h-8 px-1">
-                                        Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
-                                    </div>
-                                    <div className="text-xl font-medium h-15 px-1">
-                                        Address: <span className="font-normal">{item?.address}</span>
-                                    </div>
-                                    <div className="border font-medium h-10 rounded-b-sm px-1 flex justify-around text-3xl">
-                                        <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(item._id)}><MdDeleteForever /></button>
-                                        <button className='text-green-500 cursor-pointer' onClick={() => navigate(`/edit/${item._id}`)}><BiSolidEdit /></button>
-                                    </div>
-                                </div>
-                            );
-                        })
-                        :
-                        <p className='text-2xl sm:text-3xl text-center w-full my-2'>Data not found</p>
-                }
-            </div>
+                                );
+                            })
+                            :
+                            <p className='text-2xl sm:text-3xl text-center w-full my-2'>Data not found</p>
+                    }
+                </div>
+            }
         </div>
     );
 };

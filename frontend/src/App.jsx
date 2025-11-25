@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import AllCustomerData from "./Customer/allCustomerData";
 import SingleCustomerData from "./Customer/singleCustomerData";
 import Footer from "./Athentication/Footer";
+import Error from "./Athentication/Error";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path={"/forget"} element={<ForgotPassword />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/signup"} element={<Signup />} />
+          <Route path={"*"} element={<Error />} />
         </Routes>
         <Footer/>
       </BrowserRouter>

@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import { BiLoaderAlt } from "react-icons/bi";
+import { useNavigate } from "react-router";
+import { ToastContainer, toast } from 'react-toastify';
 const AddData = () => {
 
     const [title, setTitle] = useState("");
@@ -12,9 +14,12 @@ const AddData = () => {
     const [address, setAddress] = useState("");
     const [file, setFile] = useState();
 
+    const [load, setLoad] = useState(false);
+
     const [error, setError] = useState(false);
 
     let url = import.meta.env.VITE_URL;
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,8 +30,7 @@ const AddData = () => {
         }
         const sizeInMB = file.size / (1024 * 1024);
         if (sizeInMB > 2) {
-            alert("file size must be less than 2 MB");
-            
+            toast.warn("file size must be less than 2 MB");
             setError(true);
             return;
         }
@@ -37,7 +41,7 @@ const AddData = () => {
         }
 
         if (!title.trim() || !String(area).trim() || !String(rent).trim() || !String(pincode).trim() || !String(contact).trim() || !address.trim()) {
-            alert("white space is not allowed...");
+            toast.warn("white space is not allowed...");
             return;
         }
 
@@ -54,6 +58,7 @@ const AddData = () => {
 
         console.log([...formData]);
         try {
+            setLoad(true);
             let result = await fetch(`${url}/data/addData`, {
                 method: "post",
                 body: formData,
@@ -61,17 +66,30 @@ const AddData = () => {
                     "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
                 }
             });
-
+            ///////////////////////////////////////////////////
             let data = await result.json();
-            console.log(data);
+            if (data.success) {
+                toast.success("data add successfully...");
+                console.log(data);
+                setLoad(false);
+                navigate("/all");
+            }
+            else {
+                toast.error(data.message);
+                console.log(data);
+                setLoad(false);
+            }
+
         }
         catch (err) {
-            alert("something went wrong...", err.message);
+            setLoad(false);
+            toast.error("something went wrong...");
         }
     }
 
     return (
         <div>
+            <ToastContainer />
             <h1 className="text-center text-2xl sm:text-3xl mt-4 underline">Add Property Details</h1>
             <div className="w-79 sm:w-120 lg:w-240 m-auto mt-5 px-4 pt-3 lg:pt-5 pb-8 mb-2 rounded-xl bg-white " style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
                 <form onSubmit={handleSubmit}>
@@ -148,8 +166,14 @@ const AddData = () => {
                     </div>
 
                     <div className="border h-10 w-full lg:w-100 rounded bg-green-300 hover:bg-green-400 flex justify-center items-center text-xl font-medium m-auto mt-8">
-                        <button type="submit" className="h-full w-full cursor-pointer">Submit</button>
+
+                        {load ?
+                            <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Adding...<BiLoaderAlt className="text-xl rotate-icon" /></button>
+                            :
+                            <button type="submit" className="w-full h-full cursor-pointer">Submit</button>
+                        }
                     </div>
+
                 </form>
 
             </div>

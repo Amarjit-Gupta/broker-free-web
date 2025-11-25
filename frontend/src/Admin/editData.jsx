@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import R from '../assets/R.jpeg';
+import { useNavigate, useParams } from "react-router";
+import { BiLoaderAlt } from "react-icons/bi";
+import { ToastContainer, toast } from 'react-toastify';
 
 const EditData = () => {
 
@@ -18,9 +19,12 @@ const EditData = () => {
     const [public_id, setPublic_id] = useState("");
     const [fileurl, setFileurl] = useState("");
 
+    const [load, setLoad] = useState(false);
+
     const [error, setError] = useState(false);
 
     let url = import.meta.env.VITE_URL;
+    const navigate = useNavigate();
 
     let id = useParams();
     let index = id.id;
@@ -32,7 +36,7 @@ const EditData = () => {
         if (file) {
             const sizeInMB = file.size / (1024 * 1024);
             if (sizeInMB > 2) {
-                alert("file size must be less than 2 MB");
+                toast.warn("file size must be less than 2 MB");
                 return;
             }
         }
@@ -43,7 +47,7 @@ const EditData = () => {
         }
 
         if (!title.trim() || !String(area).trim() || !String(rent).trim() || !String(pincode).trim() || !String(contact).trim() || !address.trim()) {
-            alert("white space is not allowed...");
+            toast.warn("white space is not allowed...");
             return;
         }
 
@@ -56,16 +60,17 @@ const EditData = () => {
         formData.append("contact", contact);
         formData.append("availability", availability);
         formData.append("address", address);
-        if(file){
+        if (file) {
             formData.append("file", file);
         }
         formData.append("fileName", fileName);
         formData.append("public_id", public_id);
         formData.append("fileurl", fileurl);
-        
+
 
         console.log([...formData]);
         try {
+            setLoad(true);
             let result = await fetch(`${url}/data/updateData/${index}`, {
                 method: "put",
                 body: formData,
@@ -73,12 +78,21 @@ const EditData = () => {
                     "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
                 }
             });
-
+            /////////////
             let data = await result.json();
-            console.log(data);
+            if (data.success) {
+                toast.success(data.message);
+                navigate("/all");
+                setLoad(false);
+            }
+            else {
+                setLoad(false);
+                toast.error(data.message);
+            }
         }
         catch (err) {
-            alert("something went wrong...", err.message);
+            setLoad(false);
+            toast.error("something went wrong...");
         }
     }
 
@@ -108,12 +122,12 @@ const EditData = () => {
                 setFileurl(d1?.url);
             }
             else {
-                alert(data.message);
+                toast.error(data.message);
             }
         }
         catch (err) {
             console.log(err.message);
-            alert("something went wrong...", err.message);
+            toast.error("something went wrong...");
         }
     }
 
@@ -135,6 +149,7 @@ const EditData = () => {
 
     return (
         <div>
+            <ToastContainer />
             <h1 className="text-center text-2xl sm:text-3xl mt-4 underline">Edit Property Details</h1>
             <div className="w-79 sm:w-120 lg:w-240 m-auto mt-5 px-4 pt-3 lg:pt-5 pb-8 mb-2 rounded-xl" style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
                 <form onSubmit={handleSubmit}>
@@ -220,9 +235,15 @@ const EditData = () => {
 
                     </div>
 
-                    <div className="border h-10 w-full lg:w-100 rounded-xl bg-green-300 hover:bg-green-400 flex justify-center items-center text-xl font-medium m-auto mt-8">
-                        <button type="submit" className="h-full w-full cursor-pointer">Submit</button>
+                    <div className="border h-10 w-full lg:w-100 rounded bg-green-300 hover:bg-green-400 flex justify-center items-center text-xl font-medium m-auto mt-8">
+
+                        {load ?
+                            <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Updating...<BiLoaderAlt className="text-xl rotate-icon" /></button>
+                            :
+                            <button type="submit" className="w-full h-full cursor-pointer">Update</button>
+                        }
                     </div>
+
                 </form>
 
             </div>
