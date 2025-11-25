@@ -5,6 +5,7 @@ import { TbLockPassword } from "react-icons/tb";
 import { Link, useNavigate } from 'react-router';
 import { BiLoaderAlt } from "react-icons/bi";
 import { ToastContainer, toast } from 'react-toastify';
+
 const Signup = () => {
 
     const [inputValue, setInputValue] = useState({
@@ -16,18 +17,14 @@ const Signup = () => {
     let navigate = useNavigate();
 
     const [error, setError] = useState(false);
-
     const [load, setLoad] = useState(false);
-
     const [otp, setOtp] = useState(new Array(6).fill(""));
-
     const inputRef = useRef([]);
 
     const [start, setStart] = useState(false);
     const [time, setTime] = useState(600);
 
     const [getOtp, setGetOtp] = useState(true);
-
     let url = import.meta.env.VITE_URL;
 
     const handleChange = (event) => {
@@ -59,9 +56,8 @@ const Signup = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                console.log(data);
+                // console.log(data);
                 if (data.success) {
-                    //console.log(data.user);
                     toast.success(data.message);
                     setGetOtp(false);
                     setLoad(false);
@@ -82,7 +78,6 @@ const Signup = () => {
     }
 
     // for Submit OTP 
-
     const handleChangeOTP = (value, index) => {
         if (isNaN(value)) return;
         let newOtp = [...otp];
@@ -100,7 +95,6 @@ const Signup = () => {
     }
 
     // for time
-
     useEffect(() => {
         if (!start) return;
         let interval = setInterval(() => {
@@ -127,7 +121,6 @@ const Signup = () => {
         const pasteData = event.clipboardData.getData("text").slice(0, 6);
         let sliceData = pasteData.split("");
         let valData = sliceData.every((v) => !isNaN(v) && v !== "");
-        //console.log(valData);
         if (sliceData.length == 6 && valData) {
             setOtp(sliceData);
             inputRef.current[5].focus();
@@ -137,7 +130,6 @@ const Signup = () => {
     const handleSubmitOTP = async (event) => {
         event.preventDefault();
         let verifyEmailOtp = otp.join("");
-        //console.log(verifyEmailOtp);
         let email = inputValue.email;
         if (!email || !verifyEmailOtp) {
             setError(false);
@@ -152,10 +144,7 @@ const Signup = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                //console.log(data);
                 if (data.success) {
-                    // console.log(data.auth);
-                    // console.log(data.user);
                     localStorage.setItem("user", JSON.stringify(data.user));
                     localStorage.setItem("token", JSON.stringify(data.auth));
                     toast.success(data.message);
@@ -188,7 +177,6 @@ const Signup = () => {
         <ToastContainer />
         <div className="h-[calc(100vh-100px)] bg-gray-200 flex justify-center items-center">
             <div className="w-79 border-gray-300 rounded-xl p-4 sm:p-6 sm:w-100 bg-white shadow hover:shadow-xl transition-all duration-500">
-
                 {getOtp ?
                     <>
                         <h1 className="text-center text-3xl text-gray-600">Create Account</h1>
@@ -198,17 +186,14 @@ const Signup = () => {
                                 <MdPermIdentity className="text-3xl text-gray-500" /><input type="text" placeholder="Enter Name..." className="focus:outline-0 w-[75%]" name="name" value={inputValue.name} onChange={handleChange} />
                             </div>
                             {error && !inputValue.name && <p className="ml-1 text-red-500">Please Enter Name...</p>}
-
                             <div className="bg-gray-100 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                                 <MdOutlineMailOutline className="text-3xl text-gray-500" /><input type="email" placeholder="Enter Email ID..." className="focus:outline-0 w-[75%]" name="email" value={inputValue.email} onChange={handleChange} />
                             </div>
                             {error && !inputValue.email && <p className="ml-1 text-red-500">Please Enter Email...</p>}
-
                             <div className="bg-gray-100 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                                 <TbLockPassword className="text-3xl text-gray-500" /><input type="password" placeholder="Enter Password..." className="focus:outline-0 w-[75%]" name="password" value={inputValue.password} onChange={handleChange} />
                             </div>
                             {error && !inputValue.password && <p className="ml-1 text-red-500">Please Enter Password...</p>}
-
                             <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                                 {load ?
                                     <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></button>
@@ -216,7 +201,6 @@ const Signup = () => {
                                     <button type="submit" className="w-full h-full cursor-pointer">Submit</button>
                                 }
                             </div>
-
                         </form>
                         <p className="text-center mt-2 mb-1 sm:text-xl text-gray-700">Already have an account? <Link to={"/login"} className="text-red-500 underline font-medium">Login here</Link></p>
                     </>
@@ -225,7 +209,6 @@ const Signup = () => {
                         <h1 className="text-center text-3xl text-gray-600">Verify Email OTP</h1>
                         <h2 className="text-center text-gray-600 mb-3 text-[15px]">Enter the 6-digit code sent to your email</h2>
                         <form onSubmit={handleSubmitOTP}>
-
                             <div className="flex justify-between">
                                 {otp?.map((v, index) => {
                                     return (
@@ -245,7 +228,6 @@ const Signup = () => {
                                 })}
                             </div>
                             <div className="bg-gray-300 border text-xl flex justify-center items-center gap-4 rounded-2xl p-1 hover:bg-gray-400 mt-3 sm:mt-5">
-
                                 <button className="h-full w-full rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>
                                     {load ?
                                          <span className="flex justify-center items-center gap-5 cursor-not-allowed opacity-50">Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></span>
@@ -253,7 +235,6 @@ const Signup = () => {
                                          <span>Submit OTP</span>
                                     }   
                                 </button>
-
                             </div>
                         </form>
                         <div className="border mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">

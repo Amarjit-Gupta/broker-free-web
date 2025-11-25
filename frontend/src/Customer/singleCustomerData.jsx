@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import R from '../assets/R.jpeg';
-import { LuSquareArrowOutUpRight } from "react-icons/lu";
-import { BiSolidEdit } from "react-icons/bi";
-import { MdDeleteForever } from "react-icons/md";
 import { useNavigate, useParams } from "react-router";
 import loader from '../assets/loader.gif';
 import { MdPermIdentity } from "react-icons/md";
 import { IoIosContact } from "react-icons/io";
 import { LiaAddressCardSolid } from "react-icons/lia";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { BiLoaderAlt } from "react-icons/bi";
 import { ToastContainer, toast } from 'react-toastify';
@@ -33,21 +28,26 @@ const SingleCustomerData = () => {
     const navigate = useNavigate();
 
     const [load, setLoad] = useState(false);
-
     const [show, setShow] = useState(false);
-
     const [load1, setLoad1] = useState(false);
+
+    const [inputValue, setInputValue] = useState({
+        name: "",
+        phone: "",
+        address: ""
+    });
+
+    const [error, setError] = useState(false);
 
     let id = useParams();
     let index = id.id;
-    // console.log(index);
 
     const getSingleData = async () => {
         try {
             setLoad1(true);
             let data = await fetch(`${url}/data/getSingleCustomerData/${index}`);
             let result = await data.json();
-            console.log(result);
+            // console.log(result);
 
             if (result.success) {
                 let d1 = result?.result;
@@ -79,16 +79,6 @@ const SingleCustomerData = () => {
         getSingleData();
     }, []);
 
-    // for form
-
-    const [inputValue, setInputValue] = useState({
-        name: "",
-        phone: "",
-        address: ""
-    });
-
-    const [error, setError] = useState(false);
-
     const handleChange = (event) => {
         setInputValue({ ...inputValue, [event.target.name]: event.target.value });
     }
@@ -110,8 +100,6 @@ const SingleCustomerData = () => {
         else if (inputValue.name.trim() && inputValue.phone.trim() && inputValue.address.trim()) {
             try {
                 setLoad(true);
-                console.log(inputValue);
-                console.log(userEmail);
                 let name = inputValue.name;
                 let phone = inputValue.phone;
                 let address = inputValue.address;
@@ -122,8 +110,6 @@ const SingleCustomerData = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                console.log("booked: ", data);
-                // setShow(false);
                 if (data.success) {
                 toast.success(data.message);
                     navigate("/");
@@ -137,7 +123,6 @@ const SingleCustomerData = () => {
                 }
             }
             catch (err) {
-                console.log(err);
                 toast.error("something went wrong...");
                 setShow(false);
                 setLoad(false);
@@ -152,7 +137,6 @@ const SingleCustomerData = () => {
         <div className="border">
             <ToastContainer />
             <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">Single Property Details</h1>
-
             {load1 ? <div className="w-17 h-88 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
                 <div className='my-[2%]'>
                     <div className="border border-red-500 lg:w-200 lg:flex-row p-2 rounded-xl m-auto flex justify-between flex-col w-79 bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
@@ -162,7 +146,6 @@ const SingleCustomerData = () => {
                             <div className="border text-xl font-medium h-8 px-1">
                                 Area: <span className="font-normal">{area} sq ft</span>
                             </div>
-
                             <div className="border text-xl font-medium h-8 px-1">
                                 Rent: <span className="font-normal">₹{rent}</span>
                             </div>
@@ -185,46 +168,34 @@ const SingleCustomerData = () => {
                     </div>
                     <div className="border font-medium rounded text-xl lg:w-200 m-auto mt-[1%] flex justify-between flex-col-reverse lg:flex-row w-79 gap-1">
                         <div className="border text-gray-700 w-70 flex items-center justify-center gap-4 cursor-pointer bg-gray-200 hover:bg-gray-300 rounded py-1 m-auto lg:m-0" onClick={() => navigate("/")}><FaArrowLeftLong />Go Back</div>
-
                         <div className="border text-gray-700 w-40 bg-green-200 hover:bg-green-300 flex justify-center items-center rounded py-1 m-auto lg:m-0" > {availability == "Available" ? <button className='cursor-pointer h-full w-full' onClick={() => setShow(true)}>Book Now</button> : <button className='text-red-400 cursor-not-allowed h-full w-full' disabled={true}>Unavailable</button>}</div>
-
                     </div>
                 </div>
             }
-
 
             <div className={`h-screen w-full bg-gray-500/50 fixed left-0 flex justify-center items-center ${show ? "top-0" : "x1"}`}>
                 <div className="w-79 border border-gray-300 rounded-xl p-4 sm:pt-6 sm:pb-8 sm:px-6 sm:w-100 bg-white">
                     <button className="border float-right p-1 font-medium rounded cursor-pointer" onClick={() => setShow(false)}><RxCross2 /></button>
                     <h2 className="text-center text-xl text-gray-600 mb-3 sm:text-2xl">Fill Details</h2>
                     <form onSubmit={handleSubmit}>
-
                         <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <MdPermIdentity className="text-3xl text-gray-700" /><input type="text" placeholder="Enter Name..." className="focus:outline-0 w-[75%]" name="name" value={inputValue.name} onChange={handleChange} />
                         </div>
                         {error && !inputValue.name && <p className="ml-1 text-red-500">Please Enter Name...</p>}
-
                         <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <IoIosContact className="text-3xl text-gray-700" /><input type="tel" placeholder="Enter Phone No..." className="focus:outline-0 w-[75%]" name="phone" value={inputValue.phone} onChange={handleChange} />
                         </div>
                         {error && !inputValue.phone && <p className="ml-1 text-red-500">Please Enter Phone No...</p>}
-
                         <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <LiaAddressCardSolid className="text-3xl text-gray-700" /><textarea className="w-[75%] resize-none outline-0" name="address" value={inputValue.address} onChange={handleChange} placeholder="Enter Your Address..."></textarea>
                         </div>
                         {error && !inputValue.address && <p className="ml-1 text-red-500">Please Enter Address...</p>}
-
                         <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
-
-
-
-
                             {load ?
                                 <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                 :
                                 <button type="submit" className="w-full h-full cursor-pointer">Submit</button>
                             }
-
                         </div>
                     </form>
                 </div>

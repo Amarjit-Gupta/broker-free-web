@@ -23,7 +23,6 @@ const AddData = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!file) {
             setError(true);
             return;
@@ -34,12 +33,14 @@ const AddData = () => {
             setError(true);
             return;
         }
-
         if (!title || !area || !rent || !pincode || !bhk || !contact || !availability || !address) {
             setError(true);
             return;
         }
-
+        if (String(contact).length !== 10) {
+            toast.warn("please enter 10 digit in contact no...");
+            return;
+        }
         if (!title.trim() || !String(area).trim() || !String(rent).trim() || !String(pincode).trim() || !String(contact).trim() || !address.trim()) {
             toast.warn("white space is not allowed...");
             return;
@@ -56,7 +57,7 @@ const AddData = () => {
         formData.append("address", address);
         formData.append("file", file);
 
-        console.log([...formData]);
+        // console.log([...formData]);
         try {
             setLoad(true);
             let result = await fetch(`${url}/data/addData`, {
@@ -66,20 +67,16 @@ const AddData = () => {
                     "authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))}`
                 }
             });
-            ///////////////////////////////////////////////////
             let data = await result.json();
             if (data.success) {
                 toast.success("data add successfully...");
-                console.log(data);
                 setLoad(false);
                 navigate("/all");
             }
             else {
                 toast.error(data.message);
-                console.log(data);
                 setLoad(false);
             }
-
         }
         catch (err) {
             setLoad(false);
@@ -94,31 +91,27 @@ const AddData = () => {
             <div className="w-79 sm:w-120 lg:w-240 m-auto mt-5 px-4 pt-3 lg:pt-5 pb-8 mb-2 rounded-xl bg-white " style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
                 <form onSubmit={handleSubmit}>
                     <div className=" grid lg:grid-cols-2 gap-x-10 gap-y-3 lg:gap-y-4 grid-cols-1">
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Property Title:</label><br />
                             <input type="text" className="border w-full h-10 text-xl px-3 rounded bg-gray-50" placeholder="Enter Property Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
                             {error && !title && <p className="ml-1 text-red-500">Please Enter Property Title...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Area (sq ft):</label><br />
                             <input type="number" className="border w-full h-10 text-xl px-3 rounded bg-gray-50" placeholder="Enter Area in (sq ft)..." value={area} onChange={(e) => setArea(e.target.value)} />
                             {error && !area && <p className="ml-1 text-red-500">Please Enter Area...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Rent (₹):</label><br />
                             <input type="number" className="border w-full h-10 text-xl px-3 rounded bg-gray-50" placeholder="Enter Rent in Rupees..." value={rent} onChange={(e) => setRent(e.target.value)} />
                             {error && !rent && <p className="ml-1 text-red-500">Please Enter Rent...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Pincode:</label><br />
                             <input type="number" className="border w-full h-10 text-xl px-3 rounded bg-gray-50" placeholder="Enter Pincode..." value={pincode} onChange={(e) => setPincode(e.target.value)} />
                             {error && !pincode && <p className="ml-1 text-red-500">Please Enter Pincode...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">BHK:</label><br />
                             <select name="" id="" className="border w-full h-10 text-xl px-2 rounded bg-gray-50" value={bhk} onChange={(e) => setBhk(e.target.value)}  >
                                 <option value="">Select BHK...</option>
@@ -130,14 +123,12 @@ const AddData = () => {
                             </select>
                             {error && !bhk && <p className="ml-1 text-red-500">Please Select BHK...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Contact No:</label><br />
                             <input type="number" className="border w-full h-10 text-xl px-3 rounded bg-gray-50" placeholder="Enter Contact No..." value={contact} onChange={(e) => setContact(e.target.value)} />
                             {error && !contact && <p className="ml-1 text-red-500">Please Enter Contact No...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Availability:</label><br />
                             <select name="" id="" className="border w-full h-10 text-xl px-2 rounded bg-gray-50" value={availability} onChange={(e) => setAvailability(e.target.value)}  >
                                 <option value="">Select Availability...</option>
@@ -146,14 +137,12 @@ const AddData = () => {
                             </select>
                             {error && !availability && <p className="ml-1 text-red-500">Please Select Availability...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Address:</label><br />
                             <textarea name="" id="" placeholder="Enter full address here..." className="border w-full rounded px-2 text-xl resize-none bg-gray-50" value={address} onChange={(e) => setAddress(e.target.value)}  ></textarea>
                             {error && !address && <p className="ml-1 text-red-500">Please Enter Full Address...</p>}
                         </div>
-
-                        <div className="">
+                        <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Upload Image:</label><br />
                             <input
                                 type="file"
@@ -162,20 +151,15 @@ const AddData = () => {
                             />
                             {error && !file && <p className="ml-1 text-red-500">Please Upload file (file size must be less than 2 MB.)...</p>}
                         </div>
-
                     </div>
-
                     <div className="border h-10 w-full lg:w-100 rounded bg-green-300 hover:bg-green-400 flex justify-center items-center text-xl font-medium m-auto mt-8">
-
                         {load ?
                             <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Adding...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                             :
                             <button type="submit" className="w-full h-full cursor-pointer">Submit</button>
                         }
                     </div>
-
                 </form>
-
             </div>
         </div>
     );

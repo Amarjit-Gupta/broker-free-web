@@ -29,20 +29,18 @@ const SliderComponent = () => {
         <div className="h-50 md:h-95 w-full">
             <div className="slider-container">
                 <Slider {...settings}>
-                   <div className="slide1"><img src={slide1} alt="" className="w-full h-full object-cover" /></div>
-                   <div className="slide2"><img src={slide2} alt="" className="w-full h-full object-cover" /></div>
-                   <div className="slide3"><img src={slide3} alt="" className="w-full h-full object-cover" /></div>
-                   <div className="slide4"><img src={slide4} alt="" className="w-full h-full object-cover" /></div>
-                   <div className="slide5"><img src={slide5} alt="" className="w-full h-full object-cover" /></div>
-                   <div className="slide6"><img src={slide6} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide1"><img src={slide1} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide2"><img src={slide2} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide3"><img src={slide3} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide4"><img src={slide4} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide5"><img src={slide5} alt="" className="w-full h-full object-cover" /></div>
+                    <div className="slide6"><img src={slide6} alt="" className="w-full h-full object-cover" /></div>
                 </Slider>
             </div>
         </div>
     );
 };
 export default SliderComponent;
-
-
 
 const NextArrow = ({ onClick }) => {
     return (

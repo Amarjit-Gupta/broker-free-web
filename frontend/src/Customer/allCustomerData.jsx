@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import loader from '../assets/loader.gif';
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
-import { BiSolidEdit } from "react-icons/bi";
-import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router";
 import SliderComponent from './slider';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,12 +11,7 @@ const AllCustomerData = () => {
 
     const [value, setValue] = useState([]);
     const [sort, setSort] = useState("All");
-
-    const [search, serSearch] = useState("");
-
     const [load1, setLoad1] = useState(false);
-
-    console.log(sort);
 
     const navigate = useNavigate();
 
@@ -32,14 +25,12 @@ const AllCustomerData = () => {
             if (sort === "desc") {
                 URL += "sort=desc";
             }
-            console.log("url: ", URL);
             let data = await fetch(URL);
             let result = await data.json();
-            console.log(result);
+            // console.log(result);
 
             if (result.success) {
                 setValue(result.result);
-                // alert(result.message);
                 setLoad1(false);
             }
             else {
@@ -60,14 +51,12 @@ const AllCustomerData = () => {
     const handleChange = async (e) => {
         try {
             let key = e.target.value;
-            console.log(key);
             if (key) {
                 let result = await fetch(`${url}/data/searchCustomerData/${key}`);
                 let data = await result.json();
-                console.log(data);
+                // console.log(data);
                 if (data.success) {
                     setValue(data.result);
-                    // alert(result.message);
                 }
                 else {
                     toast.error(result.message);
@@ -96,7 +85,6 @@ const AllCustomerData = () => {
                         <option value="desc">descending</option>
                     </select>
                 </div>
-
                 {load1 ? <div className="w-17 h-71 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
                     <div className="w-79  grid grid-cols-1 gap-5 sm:w-125 sm:grid-cols-2 md:w-190 md:grid-cols-3 lg:w-255 lg:grid-cols-4 xl:w-[1280px] xl:grid-cols-5
              border border-blue-500  m-auto mt-[2%]">
@@ -106,31 +94,18 @@ const AllCustomerData = () => {
                                     return (
                                         <div className="border border-gray-300 w-79 sm:w-60 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
                                             <div className="w-full h-40 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" /></div>
-                                            {/* <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div> */}
-
                                             <div className=" font-medium h-7 px-1">
                                                 Area: <span className="font-normal">{item?.area} sq ft</span>
                                             </div>
                                             <div className="  font-medium h-7 px-1">
                                                 Rent: <span className="font-normal">₹{item?.rent}</span>
                                             </div>
-                                            {/* <div className=" text-xl font-medium h-8 px-1">
-                                        Pincode:  <span className="font-normal">{item?.pincode}</span>
-                                    </div> */}
                                             <div className="  font-medium h-7 px-1 flex justify-between">
                                                 <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
-
-                                                {/* <span className="font-normal bg-green-300">Booked</span> */}
                                             </div>
-                                            {/* <div className=" text-xl font-medium h-8 px-1">
-                                        Contact No: <span className="font-normal">{item?.contact}</span>
-                                    </div> */}
                                             <div className="  font-medium h-7 px-1">
                                                 Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                                             </div>
-                                            {/* <div className="text-xl font-medium h-15 px-1">
-                                        Address: <span className="font-normal">{item?.address}</span>
-                                    </div> */}
                                             <div className="border border-gray-400 font-medium h-8 rounded-b-sm px-1 flex justify-center text-[18px]">
                                                 <button className='text-green-500 cursor-pointer flex justify-center items-center gap-5 h-full w-full' onClick={() => navigate(`/singleCustomerData/${item._id}`)}>See more<LuSquareArrowOutUpRight /></button>
                                             </div>
@@ -140,7 +115,6 @@ const AllCustomerData = () => {
                                 :
                                 <p className='text-2xl sm:text-3xl text-center w-full my-2'>Data not found</p>
                         }
-
                     </div>
                 }
             </div>

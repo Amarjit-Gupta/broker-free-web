@@ -4,6 +4,7 @@ import { TbLockPassword } from "react-icons/tb";
 import { Link, useNavigate } from 'react-router';
 import { BiLoaderAlt } from "react-icons/bi";
 import { ToastContainer, toast } from 'react-toastify';
+
 const ForgotPassword = () => {
 
     const [email, setEmail] = useState("");
@@ -13,16 +14,13 @@ const ForgotPassword = () => {
 
     const [error, setError] = useState(false);
     const [load, setLoad] = useState(false);
-
     const [otp, setOtp] = useState(new Array(6).fill(""));
 
     const inputRef = useRef([]);
-
     let navigate = useNavigate();
 
     const [start, setStart] = useState(false);
     const [time, setTime] = useState(600);
-
     const [sendEmail, setSendEmail] = useState(false);
     const [fillOtp, setFillOtp] = useState(false);
 
@@ -45,7 +43,6 @@ const ForgotPassword = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                console.log(data);
                 if (data.success) {
                     toast.success(data.message);
                     setSendEmail(true);
@@ -57,7 +54,6 @@ const ForgotPassword = () => {
                 }
             }
             catch (err) {
-                console.log(err);
                 setLoad(false);
                 toast.error("something went wrong...");
             }
@@ -68,7 +64,6 @@ const ForgotPassword = () => {
     }
 
     // for Submit OTP 
-
     const handleChangeOTP = (value, index) => {
         if (isNaN(value)) return;
         let newOtp = [...otp];
@@ -85,12 +80,10 @@ const ForgotPassword = () => {
         }
     }
 
-
     const handlePaste = (event, index) => {
         const pasteData = event.clipboardData.getData("text").slice(0, 6);
         let sliceData = pasteData.split("");
         let valData = sliceData.every((v) => !isNaN(v) && v !== "");
-        console.log(valData);
         if (sliceData.length == 6 && valData) {
             setOtp(sliceData);
             inputRef.current[5].focus();
@@ -99,11 +92,8 @@ const ForgotPassword = () => {
 
     const handleSubmitOTP = (event) => {
         event.preventDefault();
-        // let otp1 = otp.join("");
-        // console.log(otp1);
         setFillOtp(true);
     }
-
 
     // for time
 
@@ -129,13 +119,10 @@ const ForgotPassword = () => {
     let minute = Math.floor(time / 60);
     let second = time % 60;
 
-
     // for reste password
-
     const handleResetPassword = async (event) => {
         event.preventDefault();
         let resetPasswordOtp = otp.join("");
-        //console.log("email: ", email, "newpass: ", newPassword, "resetpass: ", resetPasswordOtp);;
         if (!email || !newPassword || !resetPasswordOtp) {
             setError(true);
             return;
@@ -152,7 +139,6 @@ const ForgotPassword = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                console.log(data);
                 if (data.success) {
                     toast.success(data.message);
                     navigate("/login");
@@ -164,7 +150,6 @@ const ForgotPassword = () => {
                 }
             }
             catch (err) {
-                console.log(err);
                 setLoad(false);
                 toast.error("something went wrong...");
             }
@@ -194,20 +179,12 @@ const ForgotPassword = () => {
                                 <MdOutlineMailOutline className="text-3xl text-gray-500" /><input type="email" placeholder="Enter Email ID..." className="focus:outline-0 w-[75%]" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             {error && !email && <p className="ml-1 text-red-500">Please Enter Email...</p>}
-
                             <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
-
-
-
-
-
                                 {load ?
                                     <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Sending...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                     :
                                     <button type="submit" className="w-full h-full cursor-pointer">Send OTP</button>
                                 }
-
-
                             </div>
                         </form>
                         <p className="mt-2 ml-1 text-xl mb-1 txt-red-500"> <Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></p></>}
@@ -216,7 +193,6 @@ const ForgotPassword = () => {
                     {sendEmail && !fillOtp && <><h1 className="text-center text-3xl text-gray-600">Reset Password OTP</h1>
                         <h2 className="text-center text-gray-600 mb-3 text-[15px]">Enter the 6-digit code sent to your email</h2>
                         <form onSubmit={handleSubmitOTP}>
-
                             <div className="flex justify-between">
                                 {otp?.map((v, index) => {
                                     return (
@@ -253,14 +229,12 @@ const ForgotPassword = () => {
                                 <TbLockPassword className="text-3xl text-gray-500" /><input type="password" placeholder="Enter Password..." className="focus:outline-0 w-[75%]" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                             </div>
                             {error && !newPassword && <p className="ml-1 text-red-500">Please Enter Password...</p>}
-
                             <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                                 {load ?
                                     <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Reseting...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                     :
                                     <button type="submit" className="w-full h-full cursor-pointer">Reset Password</button>
                                 }
-
                             </div>
                         </form>
                         <p className="mt-2 ml-1 text-xl mb-1 txt-red-500 sm:text-xl"><Link to={"/login"} className="text-red-500 underline font-medium">Back to Login</Link></p>

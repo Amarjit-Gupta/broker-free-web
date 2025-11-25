@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import loader from '../assets/loader.gif';
-
 import { ToastContainer, toast } from 'react-toastify';
 import { BiSolidEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
@@ -9,16 +8,9 @@ import { useNavigate } from "react-router";
 const AllData = () => {
 
     let url = import.meta.env.VITE_URL;
-
     const [value, setValue] = useState([]);
-
     const [sort, setSort] = useState("All");
-
-    const [search, serSearch] = useState("");
-    console.log(sort);
-
     const [load1, setLoad1] = useState(false);
-
     const navigate = useNavigate();
 
     const getAllData = async () => {
@@ -40,12 +32,10 @@ const AllData = () => {
                 }
             });
             let result = await data.json();
-            console.log(result);
-
+            // console.log(result);
             if (result.success) {
                 setValue(result.result);
                 setLoad1(false);
-                // alert(result.message);
             }
             else {
                 toast.error(result.message);
@@ -94,7 +84,6 @@ const AllData = () => {
     const handleChange = async (e) => {
         try {
             let key = e.target.value;
-            console.log(key);
             if (key) {
                 let result = await fetch(`${url}/data/searchAdminData/${key}`, {
                     method: "get",
@@ -104,10 +93,8 @@ const AllData = () => {
                     }
                 });
                 let data = await result.json();
-                console.log(data);
                 if (data.success) {
                     setValue(data.result);
-                    // alert(result.message);
                 }
                 else {
                     toast.error(result.message);
@@ -134,10 +121,8 @@ const AllData = () => {
                     <option value="desc">descending</option>
                 </select>
             </div>
-
             {load1 ? <div className="w-17 h-71 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
                 <div className="w-79 md:w-[665px] xl:w-252 border m-auto mt-[2%] flex flex-wrap gap-7">
-
                     {
                         value.length ?
                             value?.map((item, i) => {
@@ -145,7 +130,6 @@ const AllData = () => {
                                     <div className="border border-gray-300 w-79 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
                                         <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" />{console.log(item.url)}</div>
                                         <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div>
-
                                         <div className=" text-xl font-medium h-8 px-1">
                                             Area: <span className="font-normal">{item?.area} sq ft</span>
                                         </div>
@@ -157,8 +141,6 @@ const AllData = () => {
                                         </div>
                                         <div className=" text-xl font-medium h-8 px-1 flex justify-between">
                                             <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
-
-                                            {/* <span className="font-normal bg-green-300">Booked</span> */}
                                         </div>
                                         <div className=" text-xl font-medium h-8 px-1">
                                             Contact No: <span className="font-normal">{item?.contact}</span>
