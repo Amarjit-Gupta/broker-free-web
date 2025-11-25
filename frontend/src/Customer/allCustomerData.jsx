@@ -79,10 +79,10 @@ const AllCustomerData = () => {
     return (
         <>
         <SliderComponent/>
-        <div className="border mt-8 w-full xl:w-[90%] m-auto">
+        <div className="border border-red-500 mt-8 w-full">
             <ToastContainer />
             <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">All Property Details</h1>
-            <div className="border border-red-500 w-60 m-auto xl:ml-9 flex flex-col gap-2 sm:w-130 mt-[2%] sm:flex-row justify-between ">
+            <div className="border border-red-500 w-60 m-auto xl:ml-[7.5%] flex flex-col gap-2 sm:w-130 mt-[2%] sm:flex-row justify-between ">
                 <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded px-2" onChange={handleChange} />
                 <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded bg-gray-50 outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
                     <option value="">Sort by price</option>
@@ -91,8 +91,8 @@ const AllCustomerData = () => {
                 </select>
             </div>
 
-            <div className="w-79 sm:w-125 sm:grid-cols-2 md:w-185 md:grid-cols-3 lg:w-248 lg:grid-cols-4 xl:w-320 xl:grid-cols-5
-             border border-blue-500 gap-5 m-auto mt-[2%] grid grid-cols-1">
+            <div className="w-79  grid grid-cols-1 gap-5 sm:w-125 sm:grid-cols-2 md:w-190 md:grid-cols-3 lg:w-255 lg:grid-cols-4 xl:w-[1280px] xl:grid-cols-5
+             border border-blue-500  m-auto mt-[2%]">
 
                 {
                     value.length ?

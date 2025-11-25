@@ -108,8 +108,8 @@ const AllData = () => {
     return (
         <div className="border">
             <ToastContainer />
-            <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">All Property Details</h1>
-            <div className="border border-red-500 w-60 flex flex-col gap-3 sm:w-150 m-auto mt-[2%] sm:flex-row justify-between">
+            <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">All admin Property Details</h1>
+            <div className="border border-red-500 w-60 flex flex-col gap-3 sm:w-150 m-auto xl:ml-[16.5%] mt-[2%] sm:flex-row justify-between">
                 <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded-xl px-2" onChange={handleChange} />
                 <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded-xl bg-gray-50 outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
                     <option value="">Sort by price</option>
@@ -124,7 +124,7 @@ const AllData = () => {
                     value.length ?
                         value?.map((item, i) => {
                             return (
-                                <div className="border w-79 p-2 rounded-xl" key={item._id}>
+                                <div className="border border-gray-300 w-79 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
                                     <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" />{console.log(item.url)}</div>
                                     <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div>
 

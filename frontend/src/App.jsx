@@ -8,8 +8,7 @@ import Signup from "./Athentication/Signup";
 import { BrowserRouter, Routes, Route } from 'react-router'
 import AllCustomerData from "./Customer/allCustomerData";
 import SingleCustomerData from "./Customer/singleCustomerData";
-import Form from "./Customer/form";
-import SliderComponent from "./Customer/slider";
+import Footer from "./Athentication/Footer";
 
 
 const App = () => {
@@ -19,7 +18,6 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path={"/"} element={<AllCustomerData/>} />
-          <Route path={"/form"} element={<Form/>} />
           <Route path={"/add"} element={<AddData/>} />
           <Route path={"/all"} element={<AllData/>} />
           
@@ -29,6 +27,7 @@ const App = () => {
           <Route path={"/login"} element={<Login />} />
           <Route path={"/signup"} element={<Signup />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </>
   );

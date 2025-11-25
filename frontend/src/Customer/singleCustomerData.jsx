@@ -180,27 +180,27 @@ const SingleCustomerData = () => {
 
 
             <div className={`h-screen w-full bg-gray-500/50 fixed left-0 flex justify-center items-center ${show?"top-0":"x1"}`}>
-                <div className="w-79 border rounded-xl p-4 sm:pt-6 sm:pb-8 sm:px-6 sm:w-100 bg-black">
-                    <button className="border float-right p-1 font-medium rounded cursor-pointer bg-green-300" onClick={()=>setShow(false)}><RxCross2 /></button>
+                <div className="w-79 border border-gray-300 rounded-xl p-4 sm:pt-6 sm:pb-8 sm:px-6 sm:w-100 bg-white">
+                    <button className="border float-right p-1 font-medium rounded cursor-pointer" onClick={()=>setShow(false)}><RxCross2 /></button>
                     <h2 className="text-center text-xl text-gray-600 mb-3 sm:text-2xl">Fill Details</h2>
                     <form onSubmit={handleSubmit}>
 
-                        <div className="bg-gray-300 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded-2xl p-1 mt-3 sm:mt-5">
+                        <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <MdPermIdentity className="text-3xl text-gray-700" /><input type="text" placeholder="Enter Name..." className="focus:outline-0 w-[75%]" name="name" value={inputValue.name} onChange={handleChange} />
                         </div>
                         {error && !inputValue.name && <p className="ml-1 text-red-500">Please Enter Name...</p>}
 
-                        <div className="bg-gray-300 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded-2xl p-1 mt-3 sm:mt-5">
+                        <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <IoIosContact className="text-3xl text-gray-700" /><input type="tel" placeholder="Enter Phone No..." className="focus:outline-0 w-[75%]" name="phone" value={inputValue.phone} onChange={handleChange} />
                         </div>
                         {error && !inputValue.phone && <p className="ml-1 text-red-500">Please Enter Phone No...</p>}
 
-                        <div className="bg-gray-300 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded-2xl p-1 mt-3 sm:mt-5">
+                        <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
                             <LiaAddressCardSolid className="text-3xl text-gray-700" /><textarea className="w-[75%] resize-none outline-0" name="address" value={inputValue.address} onChange={handleChange} placeholder="Enter Your Address..."></textarea>
                         </div>
                         {error && !inputValue.address && <p className="ml-1 text-red-500">Please Enter Address...</p>}
 
-                        <div className="bg-gray-300 border text-xl flex justify-center items-center gap-4 rounded-2xl p-1 hover:bg-gray-400 mt-3 sm:mt-5">
+                        <div className="bg-gray-100 border border-gray-500 text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                             <button className="h-full w-full rounded-2xl cursor-pointer">Submit</button>
                         </div>
                     </form>
