@@ -11,7 +11,7 @@ const Footer = () => {
         <div className=' bg-gray-200 pb-3'>
             <div className="border border-red-500 p-5 w-full flex justify-around items-center flex-col-reverse gap-3 lg:flex-row">
                 <div className="border border-red-500 h-15 md:h-20 w-79 md:w-90 flex items-center justify-between">
-                    <div className="border h-full w-15 md:w-20"><img src={house} alt="" className='h-full w-full scale-200' /></div>
+                    <div className="border h-full w-15 md:w-20"><img src={house} alt="house-image" className='h-full w-full scale-200' /></div>
                     <div className="border h-13 w-60 md:w-66">
                         <p className='text-xl md:text-2xl text-gray-800'>Find Your Perfect Home</p>
                         <p className='text-[12px] md:text-[14px] text-gray-800'>Explore neighborhods, discover properties</p>
