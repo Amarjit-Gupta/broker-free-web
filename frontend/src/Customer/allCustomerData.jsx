@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { BiSolidEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router";
+import SliderComponent from './slider';
 
 const AllCustomerData = () => {
 
@@ -42,7 +43,7 @@ const AllCustomerData = () => {
             }
         }
         catch (err) {
-            alert("something went wrong...");
+            alert("something went wrong...hello");
         }
     }
 
@@ -76,38 +77,41 @@ const AllCustomerData = () => {
     }
 
     return (
-        <div className="border">
+        <>
+        <SliderComponent/>
+        <div className="border mt-8 w-full xl:w-[90%] m-auto">
             <ToastContainer />
             <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">All Property Details</h1>
-            <div className="border border-red-500 w-60 flex flex-col gap-3 sm:w-150 m-auto mt-[2%] sm:flex-row justify-between">
-                <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded-xl px-2" onChange={handleChange} />
-                <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded-xl bg-gray-50 outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
+            <div className="border border-red-500 w-60 m-auto xl:ml-9 flex flex-col gap-2 sm:w-130 mt-[2%] sm:flex-row justify-between ">
+                <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded px-2" onChange={handleChange} />
+                <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded bg-gray-50 outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
                     <option value="">Sort by price</option>
                     <option value="asc">ascending</option>
                     <option value="desc">descending</option>
                 </select>
             </div>
 
-            <div className="w-79 md:w-[510px] lg:w-[779px] xl:w-[1046px] border m-auto mt-[2%] flex flex-wrap gap-7">
+            <div className="w-79 sm:w-125 sm:grid-cols-2 md:w-185 md:grid-cols-3 lg:w-248 lg:grid-cols-4 xl:w-320 xl:grid-cols-5
+             border border-blue-500 gap-5 m-auto mt-[2%] grid grid-cols-1">
 
                 {
                     value.length ?
                         value?.map((item, i) => {
                             return (
-                                <div className="border w-79 md:w-60 p-2 rounded-xl" key={item._id}>
-                                    <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" /></div>
+                                <div className="border border-gray-300 w-79 sm:w-60 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
+                                    <div className="w-full h-40 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" /></div>
                                     {/* <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div> */}
 
-                                    <div className=" text-xl font-medium h-8 px-1">
+                                    <div className=" font-medium h-7 px-1">
                                         Area: <span className="font-normal">{item?.area} sq ft</span>
                                     </div>
-                                    <div className=" text-xl font-medium h-8 px-1">
+                                    <div className="  font-medium h-7 px-1">
                                         Rent: <span className="font-normal">₹{item?.rent}</span>
                                     </div>
                                     {/* <div className=" text-xl font-medium h-8 px-1">
                                         Pincode:  <span className="font-normal">{item?.pincode}</span>
                                     </div> */}
-                                    <div className=" text-xl font-medium h-8 px-1 flex justify-between">
+                                    <div className="  font-medium h-7 px-1 flex justify-between">
                                         <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
 
                                         {/* <span className="font-normal bg-green-300">Booked</span> */}
@@ -115,13 +119,13 @@ const AllCustomerData = () => {
                                     {/* <div className=" text-xl font-medium h-8 px-1">
                                         Contact No: <span className="font-normal">{item?.contact}</span>
                                     </div> */}
-                                    <div className=" text-xl font-medium h-8 px-1">
+                                    <div className="  font-medium h-7 px-1">
                                         Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                                     </div>
                                     {/* <div className="text-xl font-medium h-15 px-1">
                                         Address: <span className="font-normal">{item?.address}</span>
                                     </div> */}
-                                    <div className="border font-medium h-10 rounded-b-sm px-1 flex justify-center text-xl">
+                                    <div className="border border-gray-400 font-medium h-8 rounded-b-sm px-1 flex justify-center text-[18px]">
                                         <button className='text-green-500 cursor-pointer flex justify-center items-center gap-5' onClick={() => navigate(`/singleCustomerData/${item._id}`)}>See more<LuSquareArrowOutUpRight /></button>
                                     </div>
                                 </div>
@@ -132,6 +136,7 @@ const AllCustomerData = () => {
                 }
             </div>
         </div>
+        </>
     );
 };
 export default AllCustomerData;

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import AllCustomerData from "./Customer/allCustomerData";
 import SingleCustomerData from "./Customer/singleCustomerData";
 import Form from "./Customer/form";
+import SliderComponent from "./Customer/slider";
 
 
 const App = () => {
@@ -17,11 +18,11 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path={"/"} element={<h1>Home page</h1>} />
+          <Route path={"/"} element={<AllCustomerData/>} />
           <Route path={"/form"} element={<Form/>} />
           <Route path={"/add"} element={<AddData/>} />
           <Route path={"/all"} element={<AllData/>} />
-          <Route path={"/allCustomerData"} element={<AllCustomerData/>} />
+          
           <Route path={"/singleCustomerData/:id"} element={<SingleCustomerData/>} />
           <Route path={"/edit/:id"} element={<EditData/>} />
           <Route path={"/forget"} element={<ForgotPassword />} />
