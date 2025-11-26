@@ -111,7 +111,7 @@ const SingleCustomerData = () => {
                 });
                 let data = await result.json();
                 if (data.success) {
-                toast.success(data.message);
+                alert(data.message);
                     navigate("/");
                     setShow(false);
                     setLoad(false);

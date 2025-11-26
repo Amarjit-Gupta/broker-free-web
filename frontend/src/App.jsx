@@ -10,6 +10,8 @@ import AllCustomerData from "./Customer/allCustomerData";
 import SingleCustomerData from "./Customer/singleCustomerData";
 import Footer from "./Athentication/Footer";
 import Error from "./Athentication/Error";
+import About from "./Athentication/AboutUs";
+import ContactUs from "./Athentication/ContactUs";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path={"/"} element={<AllCustomerData/>} />
+          <Route path={"/about"} element={<About/>} />
+          <Route path={"/contact"} element={<ContactUs/>} />
           <Route path={"/add"} element={<AddData/>} />
           <Route path={"/all"} element={<AllData/>} />
           <Route path={"/singleCustomerData/:id"} element={<SingleCustomerData/>} />

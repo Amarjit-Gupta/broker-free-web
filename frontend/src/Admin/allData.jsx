@@ -114,8 +114,8 @@ const AllData = () => {
             <ToastContainer />
             <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">All admin Property Details</h1>
             <div className="border border-red-500 w-60 flex flex-col gap-3 sm:w-150 m-auto xl:ml-[16.5%] mt-[2%] sm:flex-row justify-between">
-                <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded-xl px-2" onChange={handleChange} />
-                <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded-xl bg-gray-50 outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
+                <input type="search" placeholder="Search here..." className="border w-60 h-10 text-xl rounded-xl px-2 bg-gray-50" onChange={handleChange} />
+                <select name="" id="" className="border w-60 h-10 text-xl px-1 rounded-xl bg-gray-50  outline-0" value={sort} onChange={(e) => setSort(e.target.value)}>
                     <option value="">Sort by price</option>
                     <option value="asc">ascending</option>
                     <option value="desc">descending</option>
@@ -159,7 +159,7 @@ const AllData = () => {
                                 );
                             })
                             :
-                            <p className='text-2xl sm:text-3xl text-center w-full my-2'>Data not found</p>
+                            <p className='text-2xl sm:text-3xl text-center w-full my-2 font-medium text-gray-600'>Data not found</p>
                     }
                 </div>
             }

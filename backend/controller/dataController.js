@@ -199,21 +199,64 @@ export const sendEmail = async (req, res) => {
             from: process.env.SMTP_EMAIL,
             to: userEmail,
             subject: `You received a message via your MERN project`,
-            html: `<div
-        style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; border-radius: 10px; background-color: #f9f9f9; overflow: hidden;">
-        <div style="background-color: #52c956ff; padding: 20px; text-align: center;">
-            <h1 style="color: #fff; margin: 0; font-size: 24px;">MERN Message</h1>
-        </div>
-        <div style="padding: 20px;">
-            <h2 style="color: #4CAF50; font-size: 20px; text-align:center;">your got a message from ${name}, phone: ${phone} and address: ${address}.</h2>
-        </div>
-        <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #666;">
-            This message was sent from MERN project.
-        </div>
-    </div>`
+            html: `<div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; border-radius: 10px; background-color: #f9f9f9; overflow: hidden;">
+    <div style="background-color: #52c956ff; padding: 20px; text-align: center;">
+        <h1 style="color: #fff; margin: 0; font-size: 24px;">MERN Project</h1>
+    </div>
+    <div style="padding: 20px;">
+        <h2 style="color: #4CAF50; font-size: 20px;">Hello Amarjit, You got a new message from ${name}</h2>
+        <p style="font-size:16px;"><strong>Name:</strong> ${name}</p>
+        <p style="font-size:16px;"><strong>Phone No:</strong>${phone}</p>
+        <p style="font-size:16px;"><strong>Address:</strong></p>
+        <p style="font-size:16px;padding: 15px; background-color: #fff; border-left: 5px solid #4CAF50; border-radius: 5px;">${address}</p>
+    </div>
+    <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #666;">
+        This message was sent from MERN Project.
+    </div>
+</div>`
         }
         let data = await transporter.sendMail(mailOptions);
         return res.status(200).json({ success: true, message: "message send successfully...", result });
+    }
+    catch (err) {
+        console.log(err.message);
+        return res.status(500).json({ success: false, message: "something went wrong...", error: err.message });
+    }
+}
+
+// for contact me
+export const contactMe = async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        if (!name || !email || !message) {
+            return res.status(400).json({ success: false, message: "Please provide name, email and message..." });
+        }
+
+        let mailOptions = {
+            from: email,
+            to: process.env.SMTP_EMAIL,
+            subject: `You received a message via your MERN project`,
+            html: `<div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; border-radius: 10px; background-color: #f9f9f9; overflow: hidden;">
+    <div style="background-color: #52c956ff; padding: 20px; text-align: center;">
+        <h1 style="color: #fff; margin: 0; font-size: 24px;">MERN Project</h1>
+    </div>
+    <div style="padding: 20px;">
+        <h2 style="color: #4CAF50; font-size: 20px;">Hello Amarjit, You got a new message from ${name}</h2>
+        <p style="font-size:16px;"><strong>Name:</strong> ${name}</p>
+        <p style="font-size:16px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #4CAF50; text-decoration: none;">${email}</a></p>
+        <p style="font-size:16px;"><strong>Message:</strong></p>
+        <p style="font-size:16px;padding: 15px; background-color: #fff; border-left: 5px solid #4CAF50; border-radius: 5px;">${message}</p>
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="mailto:${email}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Reply to ${name}</a>
+        </p>
+    </div>
+    <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #666;">
+        This message was sent from MERN Project contact form.
+    </div>
+</div>`
+        }
+        let data = await transporter.sendMail(mailOptions);
+        return res.status(200).json({ success: true, message: "message send successfully..." });
     }
     catch (err) {
         console.log(err.message);

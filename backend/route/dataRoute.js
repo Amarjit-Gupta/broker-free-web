@@ -3,7 +3,7 @@ import Jwt from 'jsonwebtoken';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import { addData, deleteData, getAllCustomerData, getData, getSingleCustomerData, getSingleData, searchAdminData, searchCustomerData, sendEmail, updateData } from '../controller/dataController.js';
+import { addData, contactMe, deleteData, getAllCustomerData, getData, getSingleCustomerData, getSingleData, searchAdminData, searchCustomerData, sendEmail, updateData } from '../controller/dataController.js';
 import { User } from '../config/authdb.js';
 
 const dataRoute = express.Router();
@@ -67,5 +67,6 @@ dataRoute.get("/getAllCustomerData",getAllCustomerData);
 dataRoute.get("/getSingleCustomerData/:id",getSingleCustomerData);
 dataRoute.post("/sendMail",sendEmail);
 dataRoute.get("/searchCustomerData/:key",searchCustomerData);
+dataRoute.post("/contactMe",contactMe);
 
 export default dataRoute;
