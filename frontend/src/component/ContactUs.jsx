@@ -16,7 +16,6 @@ const ContactUs = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!name || !email || !message) {
             setError(true);
             return;
@@ -25,7 +24,6 @@ const ContactUs = () => {
             console.log(name, email, message);
             try {
                 setLoad(true);
-
                 let result = await fetch(`${url}/data/contactMe`, {
                     method: "post",
                     body: JSON.stringify({ name, email, message }),
@@ -33,7 +31,6 @@ const ContactUs = () => {
                 });
                 let data = await result.json();
                 // console.log(data);
-
                 if (data.success) {
                     toast.success(data.message);
                     setLoad(false);
@@ -75,8 +72,6 @@ const ContactUs = () => {
                             <textarea name="" id="" placeholder="Enter message..." className="w-full h-full text-xl px-2 resize-none bg-gray-100 hover:bg-gray-200 rounded" value={message} onChange={(e) => setMessage(e.target.value)} ></textarea>
                         </div>
                         {error && !message && <p className="ml-1 text-red-500">Please Enter message...</p>}
-
-
                         <div className="border border-gray-500 h-10 rounded mt-4 sm:mt-6 bg-gray-100 hover:bg-gray-200">
                             {load ?
                                 <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></button>

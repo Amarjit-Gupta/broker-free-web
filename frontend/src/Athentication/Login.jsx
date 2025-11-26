@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { TbLockPassword } from "react-icons/tb";
 import { Link, useNavigate } from "react-router";
@@ -14,7 +14,7 @@ const Login = () => {
 
     let url = import.meta.env.VITE_URL;
     let navigate = useNavigate();
-    
+
     const [error, setError] = useState(false);
     const [load, setLoad] = useState(false);
 
@@ -60,9 +60,16 @@ const Login = () => {
         }
     }
 
+    useEffect(() => {
+        let auth = localStorage.getItem("user");
+        if (auth) {
+            navigate("/");
+        }
+    }, []);
+
     return (
         <><ToastContainer />
-            <div className="h-[calc(100vh-100px)] flex justify-center items-center">
+            <div className="my-10 lg:my-20 flex justify-center items-cente">
                 <div className="w-79 border border-gray-300 rounded-xl p-4 sm:p-6 sm:w-100 bg-white shadow hover:shadow-xl transition-all duration-500">
                     <h1 className="text-center text-3xl text-gray-600">Login here</h1>
                     <h2 className="text-center text-xl text-gray-600 mb-3 sm:text-2xl">Login to your account</h2>

@@ -134,39 +134,39 @@ const SingleCustomerData = () => {
     }
 
     return (
-        <div className="border">
+        <div>
             <ToastContainer />
-            <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">Single Property Details</h1>
+            <h1 className="text-2xl sm:text-3xl text-center mt-3 md:mt-5 underline">Single Room Details</h1>
             {load1 ? <div className="w-17 h-88 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
                 <div className='my-[2%]'>
-                    <div className="border border-red-500 lg:w-200 lg:flex-row p-2 rounded-xl m-auto flex justify-between flex-col w-79 bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
+                    <div className="lg:w-200 lg:flex-row p-2 rounded-xl m-auto flex justify-between flex-col w-79 bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
                         <div className="w-74.5 lg:w-80 h-50 lg:h-80 border border-gray-500 rounded-sm">{fileurl && <img src={fileurl} alt="" className="w-full h-full rounded-sm" />}</div>
-                        <div className="mt-1 lg:mt-0 w-74 lg:w-110  border border-red-500 flex flex-col gap-1">
-                            <div className="border text-xl font-medium h-8 px-1">Title: <span className="font-normal"> {(title).length>16?(title).slice(0,15)+"...":title}</span></div>
-                            <div className="border text-xl font-medium h-8 px-1">
+                        <div className="mt-1 lg:mt-0 w-74 lg:w-110 flex flex-col gap-1">
+                            <div className="text-xl font-medium h-8 px-1">Title: <span className="font-normal"> {(title).length>16?(title).slice(0,15)+"...":title}</span></div>
+                            <div className="text-xl font-medium h-8 px-1">
                                 Area: <span className="font-normal">{String(area).length>10?String(area).slice(0,9)+"...":area} sq ft</span>
                             </div>
-                            <div className="border text-xl font-medium h-8 px-1">
+                            <div className="text-xl font-medium h-8 px-1">
                                 Rent: <span className="font-normal">₹ {String(rent).length>10?String(rent).slice(0,9)+"...":rent}</span>
                             </div>
-                            <div className="border text-xl font-medium h-8 px-1">
+                            <div className="text-xl font-medium h-8 px-1">
                                 Pincode:  <span className="font-normal">{pincode}</span>
                             </div>
-                            <div className="border text-xl font-medium h-8 px-1 flex justify-between">
+                            <div className="text-xl font-medium h-8 px-1 flex justify-between">
                                 <span>BHK: <span className="font-normal">{bhk}</span></span>
                             </div>
-                            <div className="border text-xl font-medium h-8 px-1">
+                            <div className="text-xl font-medium h-8 px-1">
                                 Contact No: <span className="font-normal">{contact}</span>
                             </div>
-                            <div className="border text-xl font-medium h-8 px-1">
+                            <div className="text-xl font-medium h-8 px-1">
                                 Availability: <span className="font-normal">{availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                             </div>
-                            <div className="border text-xl font-medium h-15 px-1">
+                            <div className="text-xl font-medium h-15 px-1">
                                 Address: <span className="font-normal">{(address).length>45?(address).slice(0,44)+"...":address}</span>
                             </div>
                         </div>
                     </div>
-                    <div className="border font-medium rounded text-xl lg:w-200 m-auto mt-[1%] flex justify-between flex-col-reverse lg:flex-row w-79 gap-1">
+                    <div className="font-medium rounded text-xl lg:w-200 m-auto mt-2 flex justify-between flex-col-reverse lg:flex-row w-79 gap-1">
                         <div className="border text-gray-700 w-70 flex items-center justify-center gap-4 cursor-pointer bg-gray-200 hover:bg-gray-300 rounded py-1 m-auto lg:m-0" onClick={() => navigate("/")}><FaArrowLeftLong />Go Back</div>
                         <div className="border text-gray-700 w-40 bg-green-200 hover:bg-green-300 flex justify-center items-center rounded py-1 m-auto lg:m-0" > {availability == "Available" ? <button className='cursor-pointer h-full w-full' onClick={() => setShow(true)}>Book Now</button> : <button className='text-red-400 cursor-not-allowed h-full w-full' disabled={true}>Unavailable</button>}</div>
                     </div>

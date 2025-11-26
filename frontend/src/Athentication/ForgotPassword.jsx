@@ -165,10 +165,17 @@ const ForgotPassword = () => {
         }
     }, [sendEmail, fillOtp]);
 
+    useEffect(() => {
+        let auth = localStorage.getItem("user");
+        if (auth) {
+            navigate("/");
+        }
+    }, []);
+
     return (
         <>
             <ToastContainer />
-            <div className="h-[calc(100vh-100px)] bg-gray-200 flex justify-center items-center">
+            <div className="my-10 lg:my-20 bg-gray-100 flex justify-center items-center">
                 <div className="w-79 border border-gray-300 rounded-xl p-4 sm:p-6 sm:w-100 bg-white shadow hover:shadow-xl transition-all duration-500">
 
                     {/* for email */}

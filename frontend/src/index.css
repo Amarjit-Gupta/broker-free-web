@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-  background-color: #f3f1f1;
+  @apply bg-gray-100
 }
 
 input:-webkit-autofill,
@@ -13,7 +13,9 @@ textarea:-webkit-autofill {
   top: 100%;
 }
 
-.load-icon{opacity: 0.5;}
+.load-icon {
+  opacity: 0.5;
+}
 
 .rotate-icon {
   animation: rotate 1s linear infinite;
@@ -23,7 +25,16 @@ textarea:-webkit-autofill {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.drop-child {
+  display: none;
+}
+
+.drop-main:hover .drop-child {
+  display: block;
 }

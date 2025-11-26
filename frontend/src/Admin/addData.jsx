@@ -92,7 +92,7 @@ const AddData = () => {
         <div>
             <ToastContainer />
             <h1 className="text-center text-2xl sm:text-3xl mt-4 underline">Add Property Details</h1>
-            <div className="w-79 sm:w-120 lg:w-240 m-auto mt-5 px-4 pt-3 lg:pt-5 pb-8 mb-2 rounded-xl bg-white " style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
+            <div className="w-79 sm:w-120 lg:w-240 m-auto my-5 px-4 pt-3 lg:pt-5 pb-8 rounded-xl bg-white" style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
                 <form onSubmit={handleSubmit}>
                     <div className=" grid lg:grid-cols-2 gap-x-10 gap-y-3 lg:gap-y-4 grid-cols-1">
                         <div>
