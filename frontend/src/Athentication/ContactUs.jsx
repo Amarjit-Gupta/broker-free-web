@@ -12,6 +12,8 @@ const ContactUs = () => {
 
     const [error, setError] = useState(false);
 
+    let url = import.meta.env.VITE_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -30,19 +32,19 @@ const ContactUs = () => {
                     headers: { "Content-type": "application/json" }
                 });
                 let data = await result.json();
-                setLoad(false);
-                console.log(data);
-                // if (data.success) {
-                //     toast.success(data.message);
-                //     navigate("/");
-                //     setShow(false);
-                //     setLoad(false);
-                // }
-                // else {
-                //     toast.error(data.message);
-                //     setShow(false);
-                //     setLoad(false);
-                // }
+                // console.log(data);
+
+                if (data.success) {
+                    toast.success(data.message);
+                    setLoad(false);
+                    setName("");
+                    setEmail("");
+                    setMessage("");
+                }
+                else {
+                    toast.error(data.message);
+                    setLoad(false);
+                }
             }
             catch (err) {
                 toast.error("something went wrong...");
