@@ -128,28 +128,28 @@ const AllData = () => {
                             value?.map((item, i) => {
                                 return (
                                     <div className="border border-gray-300 w-79 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
-                                        <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" />{console.log(item.url)}</div>
-                                        <div className=" text-xl font-medium h-15 px-1">Title: <span className="font-normal">{item?.title}</span></div>
-                                        <div className=" text-xl font-medium h-8 px-1">
-                                            Area: <span className="font-normal">{item?.area} sq ft</span>
+                                        <div className="w-full h-50 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" /></div>
+                                        <div className=" text-xl font-medium h-8 px-1 border">Title: <span className="font-normal">{(item?.title).length>16?(item?.title).slice(0,15)+"...":item?.title}</span></div>
+                                        <div className=" text-xl font-medium h-8 px-1 border">
+                                            Area: <span className="font-normal">{String(item?.area).length>10?String(item?.area).slice(0,9)+"...":item?.area} sq ft</span>
                                         </div>
-                                        <div className=" text-xl font-medium h-8 px-1">
-                                            Rent: <span className="font-normal">₹{item?.rent}</span>
+                                        <div className=" text-xl font-medium h-8 px-1 border">
+                                            Rent: <span className="font-normal">₹ {String(item?.rent).length>10?String(item?.rent).slice(0,9)+"...":item?.rent}</span>
                                         </div>
-                                        <div className=" text-xl font-medium h-8 px-1">
+                                        <div className=" text-xl font-medium h-8 px-1 border">
                                             Pincode:  <span className="font-normal">{item?.pincode}</span>
                                         </div>
-                                        <div className=" text-xl font-medium h-8 px-1 flex justify-between">
+                                        <div className="border text-xl font-medium h-8 px-1 flex justify-between">
                                             <span>BHK: <span className="font-normal">{item?.bhk}</span></span>
                                         </div>
-                                        <div className=" text-xl font-medium h-8 px-1">
+                                        <div className="border text-xl font-medium h-8 px-1">
                                             Contact No: <span className="font-normal">{item?.contact}</span>
                                         </div>
-                                        <div className=" text-xl font-medium h-8 px-1">
+                                        <div className="border text-xl font-medium h-8 px-1">
                                             Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                                         </div>
-                                        <div className="text-xl font-medium h-15 px-1">
-                                            Address: <span className="font-normal">{item?.address}</span>
+                                        <div className="text-xl font-medium h-15 px-1 border wrap-break-word">
+                                            Address: <span className="font-normal">{(item?.address).length>45?(item?.address).slice(0,44)+"...":item?.address}</span>
                                         </div>
                                         <div className="border font-medium h-10 rounded-b-sm px-1 flex justify-around text-3xl">
                                             <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(item._id)}><MdDeleteForever /></button>

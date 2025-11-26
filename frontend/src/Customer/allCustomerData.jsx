@@ -93,12 +93,12 @@ const AllCustomerData = () => {
                                 value?.map((item, i) => {
                                     return (
                                         <div className="border border-gray-300 w-79 sm:w-60 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
-                                            <div className="w-full h-40 border rounded-sm mb-2"><img src={item.url} alt="" className="w-full h-full rounded-t-sm" /></div>
+                                            <div className="w-full h-40 border rounded-sm mb-2"><img src={item.url} alt="house-image" className="w-full h-full rounded-t-sm" /></div>
                                             <div className=" font-medium h-7 px-1">
-                                                Area: <span className="font-normal">{item?.area} sq ft</span>
+                                                Area: <span className="font-normal">{String(item?.area).length>10?String(item?.area).slice(0,9)+"...":item?.area} sq ft</span>
                                             </div>
                                             <div className="  font-medium h-7 px-1">
-                                                Rent: <span className="font-normal">₹{item?.rent}</span>
+                                                Rent: <span className="font-normal">₹{String(item?.rent).length>10?String(item?.rent).slice(0,9)+"...":item?.rent}</span>
                                             </div>
                                             <div className="  font-medium h-7 px-1 flex justify-between">
                                                 <span>BHK: <span className="font-normal">{item?.bhk}</span></span>

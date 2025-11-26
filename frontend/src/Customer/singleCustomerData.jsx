@@ -142,12 +142,12 @@ const SingleCustomerData = () => {
                     <div className="border border-red-500 lg:w-200 lg:flex-row p-2 rounded-xl m-auto flex justify-between flex-col w-79 bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
                         <div className="w-74.5 lg:w-80 h-50 lg:h-80 border border-gray-500 rounded-sm">{fileurl && <img src={fileurl} alt="" className="w-full h-full rounded-sm" />}</div>
                         <div className="mt-1 lg:mt-0 w-74 lg:w-110  border border-red-500 flex flex-col gap-1">
-                            <div className="border text-xl font-medium h-8 px-1">Title: <span className="font-normal">{title}</span></div>
+                            <div className="border text-xl font-medium h-8 px-1">Title: <span className="font-normal"> {(title).length>16?(title).slice(0,15)+"...":title}</span></div>
                             <div className="border text-xl font-medium h-8 px-1">
-                                Area: <span className="font-normal">{area} sq ft</span>
+                                Area: <span className="font-normal">{String(area).length>10?String(area).slice(0,9)+"...":area} sq ft</span>
                             </div>
                             <div className="border text-xl font-medium h-8 px-1">
-                                Rent: <span className="font-normal">₹{rent}</span>
+                                Rent: <span className="font-normal">₹ {String(rent).length>10?String(rent).slice(0,9)+"...":rent}</span>
                             </div>
                             <div className="border text-xl font-medium h-8 px-1">
                                 Pincode:  <span className="font-normal">{pincode}</span>
@@ -162,7 +162,7 @@ const SingleCustomerData = () => {
                                 Availability: <span className="font-normal">{availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                             </div>
                             <div className="border text-xl font-medium h-15 px-1">
-                                Address: <span className="font-normal">{address}</span>
+                                Address: <span className="font-normal">{(address).length>45?(address).slice(0,44)+"...":address}</span>
                             </div>
                         </div>
                     </div>

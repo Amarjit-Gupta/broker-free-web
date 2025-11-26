@@ -37,6 +37,10 @@ const AddData = () => {
             setError(true);
             return;
         }
+        if (String(pincode).length !== 6) {
+            toast.warn("please enter valid pincode no...");
+            return;
+        }
         if (String(contact).length !== 10) {
             toast.warn("please enter 10 digit in contact no...");
             return;
