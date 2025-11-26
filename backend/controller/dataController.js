@@ -243,7 +243,7 @@ export const contactMe = async (req, res) => {
     <div style="padding: 20px;">
         <h2 style="color: #4CAF50; font-size: 20px;">Hello Amarjit, You got a new message from ${name}</h2>
         <p style="font-size:16px;"><strong>Name:</strong> ${name}</p>
-        <p style="font-size:16px;"><strong>Email:</strong> <a href="mailto:${email}" style="text-decoration: none;">${email}</a></p>
+        <p style="font-size:16px;"><strong>Email:</strong> <a href="mailto:${email}" style="text-decoration: none;color:black;">${email}</a></p>
         <p style="font-size:16px;"><strong>Message:</strong></p>
         <p style="font-size:16px;padding: 15px; background-color: #fff; border-left: 5px solid #4CAF50; border-radius: 5px;">${message}</p>
         <p style="text-align: center; margin-top: 20px;">

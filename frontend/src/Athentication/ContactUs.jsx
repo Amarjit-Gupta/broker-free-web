@@ -77,14 +77,13 @@ const ContactUs = () => {
                         {error && !message && <p className="ml-1 text-red-500">Please Enter message...</p>}
 
 
-                        <div className="border border-gray-500 h-10 rounded mt-4 sm:mt-6">
+                        <div className="border border-gray-500 h-10 rounded mt-4 sm:mt-6 bg-gray-100 hover:bg-gray-200">
                             {load ?
                                 <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                 :
                                 <button type="submit" className="w-full h-full cursor-pointer">Submit</button>
                             }
                         </div>
-
                     </div>
                 </form>
             </div>
