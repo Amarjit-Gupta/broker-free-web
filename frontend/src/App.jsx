@@ -13,10 +13,24 @@ import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import { BrowserRouter, Routes, Route } from 'react-router';
 import PrivateComponent from "./component/PrivateComponent";
+import { useEffect, useState } from "react";
+import loader1 from './assets/loader1.gif'
 
 const App = () => {
+
+  const [mainLoader,setMainLoader] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setMainLoader(false);
+    },2000);
+  },[]);
+
   return (
     <>
+    {mainLoader?<div className="h-[100vh] w-full fixed bg-black z-50">
+      <img src={loader1} alt="loader..." className="h-35 w-45 absolute top-1/2 left-1/2 -translate-1/2" />
+    </div>:""}
       <BrowserRouter>
         <Navbar />
         <Routes>

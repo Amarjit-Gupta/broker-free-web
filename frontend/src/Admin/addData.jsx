@@ -75,7 +75,7 @@ const AddData = () => {
             if (data.success) {
                 toast.success("data add successfully...");
                 setLoad(false);
-                navigate("/all");
+                navigate("/myRoom");
             }
             else {
                 toast.error(data.message);

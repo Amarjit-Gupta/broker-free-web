@@ -162,7 +162,7 @@ const SingleCustomerData = () => {
                                 Availability: <span className="font-normal">{availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                             </div>
                             <div className="text-xl font-medium h-15 px-1">
-                                Address: <span className="font-normal">{(address).length>45?(address).slice(0,44)+"...":address}</span>
+                                Address: <span className="font-normal">{(address).length>22?(address).slice(0,20)+"..":address}</span>
                             </div>
                         </div>
                     </div>

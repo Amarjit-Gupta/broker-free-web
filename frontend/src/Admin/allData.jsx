@@ -148,7 +148,7 @@ const AllData = () => {
                                             Availability: <span className="font-normal">{item?.availability == "Available" ? "Available" : <span className="bg-green-300 px-2 rounded-xl">Booked</span>}</span>
                                         </div>
                                         <div className="text-xl font-medium h-15 px-1  wrap-break-word">
-                                            Address: <span className="font-normal">{(item?.address).length>45?(item?.address).slice(0,44)+"...":item?.address}</span>
+                                            Address: <span className="font-normal">{(item?.address).length>22?(item?.address).slice(0,20)+"..":item?.address}</span>
                                         </div>
                                         <div className="border font-medium h-10 rounded-b-sm px-1 flex justify-around text-3xl">
                                             <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(item._id)}><MdDeleteForever /></button>

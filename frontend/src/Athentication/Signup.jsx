@@ -18,6 +18,8 @@ const Signup = () => {
 
     const [error, setError] = useState(false);
     const [load, setLoad] = useState(false);
+    const [load2, setLoad2] = useState(false);
+
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const inputRef = useRef([]);
 
@@ -137,7 +139,7 @@ const Signup = () => {
         }
         else if (inputValue.email.trim() && verifyEmailOtp.trim()) {
             try {
-                setLoad(true);
+                setLoad2(true);
                 let result = await fetch(`${url}/auth/verifyAccount`, {
                     method: "post",
                     body: JSON.stringify({ email, verifyEmailOtp }),
@@ -149,16 +151,16 @@ const Signup = () => {
                     localStorage.setItem("token", JSON.stringify(data.auth));
                     toast.success(data.message);
                     navigate("/");
-                    setLoad(false);
+                    setLoad2(false);
                 }
                 else {
                     toast.error(data.message);
-                    setLoad(false);
+                    setLoad2(false);
                 }
             }
             catch (err) {
                 toast.error("something went wrong...");
-                setLoad(false);
+                setLoad2(false);
             }
         }
         else {
@@ -236,7 +238,7 @@ const Signup = () => {
                             </div>
                             <div className="bg-gray-300 border text-xl flex justify-center items-center gap-4 rounded-2xl p-1 hover:bg-gray-400 mt-3 sm:mt-5">
                                 <button className="h-full w-full rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>
-                                    {load ?
+                                    {load2 ?
                                          <span className="flex justify-center items-center gap-5 cursor-not-allowed opacity-50">Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></span>
                                          :
                                          <span>Submit OTP</span>
@@ -244,9 +246,9 @@ const Signup = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="border mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">
-                            <span className="txt-red-500 border"><Link to={"/login"} className="text-red-500 underline font-medium">Back to login</Link></span>
-                            <div className="border"> {start ? `Resend In: ${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}` : <button className="cursor-pointer text-red-500 underline font-medium" onClick={handleSubmit}>Resent OTP</button>}</div>
+                        <div className="mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">
+                            <span className="txt-red-500"><Link to={"/login"} className="text-red-500 underline font-medium">Back to login</Link></span>
+                            <div> {start ? `Resend In: ${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}` : <button className="cursor-pointer text-red-500 underline font-medium" onClick={handleSubmit}>Resent OTP</button>}</div>
                         </div>
                     </>
                 }

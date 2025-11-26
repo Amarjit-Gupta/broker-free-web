@@ -222,9 +222,9 @@ const ForgotPassword = () => {
                                 <button className="h-full w-full rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>Submit OTP</button>
                             </div>
                         </form>
-                        <div className="border mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">
-                            <span className="txt-red-500 border"><Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></span>
-                            <div className="border"> {start ? `Resend In: ${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}` : <button className="cursor-pointer" onClick={handleSendOTP}>Resent OTP</button>}</div>
+                        <div className="mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">
+                            <span className="txt-red-500"><Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></span>
+                            <div> {start ? `Resend In: ${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}` : <button className="cursor-pointer" onClick={handleSendOTP}>Resent OTP</button>}</div>
                         </div></>}
 
                     {/* for reset password */}

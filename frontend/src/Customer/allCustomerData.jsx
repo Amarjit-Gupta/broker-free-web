@@ -86,12 +86,12 @@ const AllCustomerData = () => {
                     </select>
                 </div>
                 {load1 ? <div className="w-17 h-71 m-auto my-2"><img src={loader} alt="loader" className='w-full h-17' /></div> :
-                    <div className="w-79  grid grid-cols-1 gap-5 sm:w-125 sm:grid-cols-2 md:w-190 md:grid-cols-3 lg:w-255 lg:grid-cols-4 xl:w-[1280px] xl:grid-cols-5 m-auto my-[2%] relative">
+                    <div className="w-60 grid grid-cols-1 gap-5 sm:w-125 sm:grid-cols-2 md:w-190 md:grid-cols-3 lg:w-255 lg:grid-cols-4 xl:w-[1280px] xl:grid-cols-5 m-auto my-[2%] relative">
                         {
                             value.length ?
                                 value?.map((item, i) => {
                                     return (
-                                        <div className="border border-gray-300 w-79 sm:w-60 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
+                                        <div className="border border-gray-300 w-60 sm:w-60 p-2 rounded-xl bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-500" key={item._id}>
                                             <div className="w-full h-40 border rounded-sm mb-2"><img src={item.url} alt="house-image" className="w-full h-full rounded-t-sm" /></div>
                                             <div className=" font-medium h-7 px-1">
                                                 Area: <span className="font-normal">{String(item?.area).length>10?String(item?.area).slice(0,9)+"...":item?.area} sq ft</span>

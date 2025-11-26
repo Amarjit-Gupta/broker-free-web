@@ -136,7 +136,7 @@ const EditData = () => {
             <h1 className="text-center text-2xl sm:text-3xl mt-4 underline">Edit Details</h1>
             <div className="w-79 sm:w-120 lg:w-240 m-auto my-5 px-4 pt-3 lg:pt-5 pb-8 rounded-xl" style={{ boxShadow: '0px 0px 10px 1px rgba(197, 195, 195)' }}>
                 <form onSubmit={handleSubmit}>
-                    <div className=" grid lg:grid-cols-2 gap-x-10 gap-y-3 lg:gap-y-4 grid-cols-1">
+                    <div className="grid lg:grid-cols-2 gap-x-10 gap-y-3 lg:gap-y-4 grid-cols-1">
                         <div>
                             <label htmlFor="" className="text-xl ml-1 font-medium">Property Title:</label><br />
                             <input type="text" className="border w-full h-10 text-xl px-3 rounded-xl bg-gray-50" placeholder="Enter Property Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -188,7 +188,7 @@ const EditData = () => {
                             <textarea name="" id="" placeholder="Enter full address here..." className="border w-full rounded-xl px-2 text-xl resize-none bg-gray-50" value={address} onChange={(e) => setAddress(e.target.value)}  ></textarea>
                             {error && !address && <p className="ml-1 text-red-500">Please Enter Full Address...</p>}
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex flex-col lg:flex-row gap-2 justify-between">
                             <div>
                                 <label htmlFor="" className="text-xl ml-1 font-medium">Upload Image:</label><br />
                                 <input

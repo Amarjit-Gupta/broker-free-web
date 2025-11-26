@@ -21,7 +21,6 @@ const ContactUs = () => {
             return;
         }
         else if (name.trim() && email.trim() && message.trim()) {
-            console.log(name, email, message);
             try {
                 setLoad(true);
                 let result = await fetch(`${url}/data/contactMe`, {

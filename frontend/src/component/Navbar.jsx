@@ -14,17 +14,18 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        setMenu(false);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         navigate("/login");
     }
 
     return (
-        <div className="h-20 lg:h-25 w-full bg-gray-100 sticky top-0 left-0 shadow flex justify-between items-center px-7 z-50">
+        <div className="h-20 lg:h-25 w-full bg-gray-100 sticky top-0 left-0 shadow flex justify-between items-center px-7 z-40">
             <p className="text-gray-700 font-medium text-2xl lg:text-3xl">Rental Hub</p>
             <button className='border p-1 rounded block lg:hidden text-xl' onClick={() => setMenu(!menu)}>{menu ? <RxCross2 /> : <RxHamburgerMenu />}</button>
             {auth ?
-                <div className={`flex text-xl gap-13 fixed flex-col bg-gray-100 top-20 w-full z-50 items-center pt-5 h-full lg:flex-row lg:h-8 lg:pt-0 lg:w-167 lg:static lg:top-0 transition-all duration-500 ${menu ? "right-0" : "-right-[100%]"}`}>
+                <div className={`flex text-xl gap-13 fixed flex-col bg-gray-100 top-20 w-full z-40 items-center pt-5 h-full lg:flex-row lg:h-8 lg:pt-0 lg:w-167 lg:static lg:top-0 transition-all duration-500 ${menu ? "right-0" : "-right-[100%]"}`}>
                     <div><Link to={"/"} onClick={() => setMenu(false)}>Home</Link></div>
                     <div><Link to={"/about"} onClick={() => setMenu(false)}>About Us</Link></div>
                     <div><Link to={"/contact"} onClick={() => setMenu(false)}>Contact Us</Link></div>
