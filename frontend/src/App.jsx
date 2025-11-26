@@ -21,9 +21,13 @@ const App = () => {
   const [mainLoader,setMainLoader] = useState(true);
 
   useEffect(()=>{
-    setTimeout(()=>{
+    let timeout = setTimeout(()=>{
       setMainLoader(false);
     },2000);
+
+    return () => {
+      clearTimeout(timeout);
+    }
   },[]);
 
   return (
