@@ -196,7 +196,7 @@ export const sendEmail = async (req, res) => {
         await result.save();
         // console.log(result);
         let mailOptions = {
-            from: process.env.SMTP_EMAIL,
+            from: `"no-reply" ${process.env.SMTP_EMAIL}`,
             to: userEmail,
             subject: `You received a message via your MERN project`,
             html: `<div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: auto; border-radius: 10px; background-color: #f9f9f9; overflow: hidden;">
@@ -206,7 +206,7 @@ export const sendEmail = async (req, res) => {
     <div style="padding: 20px;">
         <h2 style="color: #4CAF50; font-size: 20px;">Hello Amarjit, You got a new message from ${name}</h2>
         <p style="font-size:16px;"><strong>Name:</strong> ${name}</p>
-        <p style="font-size:16px;"><strong>Phone No:</strong>${phone}</p>
+        <p style="font-size:16px;"><strong>Phone No:</strong> ${phone}</p>
         <p style="font-size:16px;"><strong>Address:</strong></p>
         <p style="font-size:16px;padding: 15px; background-color: #fff; border-left: 5px solid #4CAF50; border-radius: 5px;">${address}</p>
     </div>

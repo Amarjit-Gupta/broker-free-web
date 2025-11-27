@@ -23,7 +23,7 @@ export const signup = async (req, res) => {
             let user = await existUser.save();
             // console.log("old: ",user);
             let mailOptions = {
-                from: process.env.SMTP_EMAIL,
+                from:`"no-reply" ${process.env.SMTP_EMAIL}`,
                 to: existUser.email,
                 subject: `You received a message via your MERN project`,
                 html: `<div
@@ -56,7 +56,7 @@ export const signup = async (req, res) => {
         let user = new User({ name, email, password, verifyEmailOtp: otp, verifyEmailOtpExpireAt: expireAt })
         await user.save();
         let mailOptions = {
-            from: process.env.SMTP_EMAIL,
+            from:`"no-reply" ${process.env.SMTP_EMAIL}`,
             to: email,
             subject: `You received a message via your MERN project`,
             html: `<div
@@ -174,7 +174,7 @@ export const sendOtp = async (req, res) => {
         await user.save();
 
         let mailOptions = {
-            from: process.env.SMTP_EMAIL,
+            from:`"no-reply" ${process.env.SMTP_EMAIL}`,
             to: email,
             subject: `You received a message via your MERN project`,
             html: `<div

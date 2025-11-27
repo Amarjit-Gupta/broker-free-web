@@ -35,7 +35,7 @@ const Navbar = () => {
                             <p className='py-1'><Link to={"/add"} onClick={() => setMenu(false)}>Add Room</Link></p>
                         </div>
                     </div>
-                    <div className='flex flex-col lg:flex-row items-center'><button className='border px-3 rounded bg-white hover:bg-gray-100' onClick={handleLogout}>logout</button> <div className="border h-9 w-9 flex justify-center items-center rounded-full mt-5 lg:mt-0 ml-0 lg:ml-2 text-xl font-medium ">{uname}</div> </div>
+                    <div className='flex flex-col lg:flex-row items-center'><button className='border px-3 rounded bg-white hover:bg-gray-100' onClick={handleLogout}>logout</button> <div className="border h-9 w-9 flex justify-center items-center rounded-full mt-5 lg:mt-0 ml-0 lg:ml-2 text-xl font-medium bg-black text-white">{uname}</div> </div>
                 </div>
                 :
                 <div className={`flex text-xl gap-13 fixed flex-col bg-gray-100 top-20 w-full z-50 items-center pt-5 h-full lg:flex-row lg:h-8 lg:pt-0 lg:w-152 lg:static lg:top-0 transition-all duration-500 ${menu ? "right-0" : "-right-[100%]"}`}>
