@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin:["http://localhost:5173","https://broker-free-project.netlify.app"]
+    origin:["http://localhost:5173","https://broker-free-web-94hi.vercel.app/"]
 }));
 
 app.get("/",(req,res)=>{
