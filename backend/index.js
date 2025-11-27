@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin:["http://localhost:5173","https://broker-free-web-94hi.vercel.app/"]
+    origin:["http://localhost:5173","https://broker-free-web-hezh.vercel.app"]
 }));
 
 app.get("/",(req,res)=>{
