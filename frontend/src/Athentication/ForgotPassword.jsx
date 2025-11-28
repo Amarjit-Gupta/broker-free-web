@@ -179,14 +179,14 @@ const ForgotPassword = () => {
                 <div className="w-79 border border-gray-300 rounded-xl p-4 sm:p-6 sm:w-100 bg-white shadow hover:shadow-xl transition-all duration-500">
 
                     {/* for email */}
-                    {!sendEmail && <><h1 className="text-center text-3xl text-gray-600">Reset Password</h1>
-                        <h2 className="text-center sm:text-xl text-gray-600 mb-3">Enter Your registered email address</h2>
+                    {!sendEmail && <><h1 className="text-center text-2xl lg:text-3xl text-gray-600">Reset Password</h1>
+                        <h2 className="text-center lg:text-xl text-gray-600 mb-3">Enter Your registered email address</h2>
                         <form onSubmit={handleSendOTP}>
-                            <div className="bg-gray-100 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
-                                <MdOutlineMailOutline className="text-3xl text-gray-500" /><input type="email" placeholder="Enter Email ID..." className="focus:outline-0 w-[75%]" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <div className="bg-gray-100 border lg:text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
+                                <MdOutlineMailOutline className="text-2xl lg:text-3xl text-gray-500" /><input type="email" placeholder="Enter Email ID..." className="focus:outline-0 w-[75%]" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             {error && !email && <p className="ml-1 text-red-500">Please Enter Email...</p>}
-                            <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
+                            <div className="bg-gray-100 border lg:text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                                 {load ?
                                     <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Sending...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                     :
@@ -194,10 +194,10 @@ const ForgotPassword = () => {
                                 }
                             </div>
                         </form>
-                        <p className="mt-2 ml-1 text-xl mb-1 txt-red-500"> <Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></p></>}
+                        <p className="mt-2 ml-1 lg:text-xl mb-1 txt-red-500"> <Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></p></>}
 
                     {/* for otp */}
-                    {sendEmail && !fillOtp && <><h1 className="text-center text-3xl text-gray-600">Reset Password OTP</h1>
+                    {sendEmail && !fillOtp && <><h1 className="text-center text-2xl lg:text-3xl text-gray-600">Reset Password OTP</h1>
                         <h2 className="text-center text-gray-600 mb-3 text-[15px]">Enter the 6-digit code sent to your email</h2>
                         <form onSubmit={handleSubmitOTP}>
                             <div className="flex justify-between">
@@ -218,25 +218,25 @@ const ForgotPassword = () => {
                                     )
                                 })}
                             </div>
-                            <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
+                            <div className="bg-gray-100 border lg:text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                                 <button className="h-full w-full rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>Submit OTP</button>
                             </div>
                         </form>
-                        <div className="mt-3 mb-1 flex justify-between items-center sm:text-xl px-1">
-                            <span className="txt-red-500"><Link to={"/login"} className="text-red-500 underline sm:text-xl font-medium">Back to Login</Link></span>
+                        <div className="mt-3 mb-1 flex justify-between items-center lg:text-xl px-1">
+                            <span className="txt-red-500"><Link to={"/login"} className="text-red-500 underline lg:text-xl font-medium">Back to Login</Link></span>
                             <div> {start ? `Resend In: ${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}` : <button className="cursor-pointer" onClick={handleSendOTP}>Resent OTP</button>}</div>
                         </div></>}
 
                     {/* for reset password */}
                     {sendEmail && fillOtp && <>
-                        <h1 className="text-center text-3xl text-gray-600">New Password</h1>
-                        <h2 className="text-center sm:text-xl text-gray-600 mb-3">Enter the new password below</h2>
+                        <h1 className="text-center text-2xl lg:text-3xl text-gray-600">New Password</h1>
+                        <h2 className="text-center lg:text-xl text-gray-600 mb-3">Enter the new password below</h2>
                         <form onSubmit={handleResetPassword}>
-                            <div className="bg-gray-100 border text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
-                                <TbLockPassword className="text-3xl text-gray-500" /><input type="password" placeholder="Enter Password..." className="focus:outline-0 w-[75%]" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                            <div className="bg-gray-100 border lg:text-xl flex justify-center items-center gap-2 sm:gap-4 rounded p-1 mt-3 sm:mt-5">
+                                <TbLockPassword className="text-2xl lg:text-3xl text-gray-500" /><input type="password" placeholder="Enter Password..." className="focus:outline-0 w-[75%]" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                             </div>
                             {error && !newPassword && <p className="ml-1 text-red-500">Please Enter Password...</p>}
-                            <div className="bg-gray-100 border text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
+                            <div className="bg-gray-100 border lg:text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-200 mt-3 sm:mt-5">
                                 {load ?
                                     <button className="flex justify-center items-center gap-5 h-full w-full disabled:opacity-50 disabled:cursor-not-allowed" disabled={load}>Reseting...<BiLoaderAlt className="text-xl rotate-icon" /></button>
                                     :
@@ -244,7 +244,7 @@ const ForgotPassword = () => {
                                 }
                             </div>
                         </form>
-                        <p className="mt-2 ml-1 text-xl mb-1 txt-red-500 sm:text-xl"><Link to={"/login"} className="text-red-500 underline font-medium">Back to Login</Link></p>
+                        <p className="mt-2 ml-1 lg:text-xl mb-1 txt-red-500"><Link to={"/login"} className="text-red-500 underline font-medium">Back to Login</Link></p>
                     </>}
                 </div>
             </div>
