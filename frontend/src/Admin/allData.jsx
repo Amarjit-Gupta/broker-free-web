@@ -158,7 +158,7 @@ const AllData = () => {
                                 );
                             })
                             :
-                            <p className='text-2xl sm:text-3xl text-center w-full my-2 font-medium text-gray-600'>Data not found</p>
+                            <p className='text-2xl sm:text-3xl text-center w-full my-2 font-medium text-gray-600 h-58'>Data not found</p>
                     }
                 </div>
             }
