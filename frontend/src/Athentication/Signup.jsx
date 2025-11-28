@@ -236,8 +236,8 @@ const Signup = () => {
                                     )
                                 })}
                             </div>
-                            <div className="bg-gray-300 border lg:text-xl flex justify-center items-center gap-4 rounded-2xl p-1 hover:bg-gray-400 mt-3 sm:mt-5">
-                                <button className="h-full w-full rounded-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>
+                            <div className="bg-gray-300 border lg:text-xl flex justify-center items-center gap-4 rounded p-1 hover:bg-gray-400 mt-3 sm:mt-5">
+                                <button className="h-full w-full rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled={!otp.every((v) => v !== "")}>
                                     {load2 ?
                                          <span className="flex justify-center items-center gap-5 cursor-not-allowed opacity-50">Submit in...<BiLoaderAlt className="text-xl rotate-icon" /></span>
                                          :
