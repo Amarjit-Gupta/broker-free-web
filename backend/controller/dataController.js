@@ -204,7 +204,7 @@ export const sendEmail = async (req, res) => {
         <h1 style="color: #fff; margin: 0; font-size: 24px;">MERN Project</h1>
     </div>
     <div style="padding: 20px;">
-        <h2 style="color: #4CAF50; font-size: 20px;">Hello Amarjit, You got a new message from ${name}</h2>
+        <h2 style="color: #4CAF50; font-size: 20px;">Hello, You got a message from ${name}</h2>
         <p style="font-size:16px;"><strong>Name:</strong> ${name}</p>
         <p style="font-size:16px;"><strong>Phone No:</strong> ${phone}</p>
         <p style="font-size:16px;"><strong>Address:</strong></p>
