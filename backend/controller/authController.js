@@ -114,7 +114,10 @@ export const verifyAccount = async (req, res) => {
         user.verifyEmailOtpExpireAt = 0;
         user.isAccountVerified = true;
         await user.save();
-        console.log("user: ",user);
+        user = user.toObject();
+        delete user.password;
+        delete user.verifyEmailOtp;
+        delete user.resetPasswordOtp;
         let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY);
         return res.status(200).json({ success: true, message: "User signup successfully...", user, auth: token });
     }
@@ -144,6 +147,10 @@ export const login = async (req, res) => {
         }
 
         let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY);
+        user = user.toObject();
+        delete user.password;
+        delete user.verifyEmailOtp;
+        delete user.resetPasswordOtp;
         return res.status(200).json({ success: true, message: "User login successfully...", user, auth: token });
     }
     catch (err) {
