@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin:["http://localhost:5173","https://broker-free-web.onrender.com"]
+    origin:["http://localhost:5173","https://broker-free-web.onrender.com","https://home-rent-auth.onrender.com"]
 }));
 
 app.get("/",(req,res)=>{
