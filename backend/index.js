@@ -15,7 +15,7 @@ await connectDB();
 app.use(express.json());
 
 app.use(cors({
-    origin:["http://localhost:5173","https://broker-free-web-3he4.vercel.app"]
+    origin:["http://localhost:5173","https://broker-free-web-on3r.vercel.app"]
 }));
 
 app.get("/",(req,res)=>{
