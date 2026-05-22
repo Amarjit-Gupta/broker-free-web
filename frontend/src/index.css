@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-gray-100
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  transition-duration: 5000s;
+}
+
+.x1 {
+  top: 100%;
+}
+
+.load-icon {
+  opacity: 0.5;
+}
+
+.rotate-icon {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.drop-child {
+  display: none;
+}
+
+.drop-main:hover .drop-child {
+  display: block;
+}

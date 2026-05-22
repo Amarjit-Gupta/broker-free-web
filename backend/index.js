@@ -1,0 +1,35 @@
+import express from 'express';
+import cors from 'cors';
+import "dotenv/config";
+import deleteUnverifiedUser from './deleteUnverifiedUser/deleteUnverifiedUser.js';
+import authRoute from './route/authRoute.js';
+import dataRoute from './route/dataRoute.js';
+import connectDB from './config/authdb.js';
+
+const port = process.env.PORT || 5000;
+
+const app = express();
+
+await connectDB();
+
+app.use(express.json());
+
+app.use(cors({
+    origin:["http://localhost:5173","https://broker-free-web.onrender.com"]
+}));
+
+app.get("/",(req,res)=>{
+    res.send("Api Working...");
+});
+
+// for authroute
+app.use("/auth",authRoute);
+
+// for dataroute
+app.use("/data",dataRoute);
+
+deleteUnverifiedUser();
+
+app.listen(port,()=>{
+    console.log(`server is running on port ${port}...`);
+});
