@@ -15,27 +15,29 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import PrivateComponent from "./component/PrivateComponent";
 import { useEffect, useState } from "react";
 import loader1 from './assets/loader1.gif'
+import TokenWatcher from "./utils/TokenWatcher";
 
 const App = () => {
 
-  const [mainLoader,setMainLoader] = useState(true);
+  const [mainLoader, setMainLoader] = useState(true);
 
-  useEffect(()=>{
-    let timeout = setTimeout(()=>{
+  useEffect(() => {
+    let timeout = setTimeout(() => {
       setMainLoader(false);
-    },2000);
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);
     }
-  },[]);
+  }, []);
 
   return (
     <>
-    {mainLoader?<div className="h-[100vh] w-full fixed bg-black z-50">
-      <img src={loader1} alt="loader..." className="h-35 w-45 absolute top-1/2 left-1/2 -translate-1/2" />
-    </div>:""}
+      {mainLoader ? <div className="h-[100vh] w-full fixed bg-black z-50">
+        <img src={loader1} alt="loader..." className="h-35 w-45 absolute top-1/2 left-1/2 -translate-1/2" />
+      </div> : ""}
       <BrowserRouter>
+        <TokenWatcher />
         <Navbar />
         <Routes>
           <Route path={"/"} element={<AllCustomerData />} />

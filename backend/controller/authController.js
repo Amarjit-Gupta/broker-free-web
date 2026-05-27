@@ -118,7 +118,7 @@ export const verifyAccount = async (req, res) => {
         delete user.password;
         delete user.verifyEmailOtp;
         delete user.resetPasswordOtp;
-        let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY);
+        let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY,{expiresIn:"1d"});
         return res.status(200).json({ success: true, message: "User signup successfully...", user, auth: token });
     }
     catch (err) {
@@ -146,7 +146,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "you can't login because this account is not verified, signup again..." });
         }
 
-        let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY);
+        let token = Jwt.sign({ id: user._id }, process.env.JWT_KEY,{expiresIn:"1d"});
         user = user.toObject();
         delete user.password;
         delete user.verifyEmailOtp;
